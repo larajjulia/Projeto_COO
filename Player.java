@@ -1,12 +1,14 @@
+import java.awt.Color;
+
 public class Player extends Game_Explodable{
-    private int state = ACTIVE; // estado do jogador
-    private double X = GameLib.WIDTH / 2; // coordenada X
-    private double Y = GameLib.HEIGHT * 0.90;  // coordenada Y
     private double velocityX = 0.25; // velocidade no eixo X
     private double velocityY = 0.25; // velocidade no eixo Y
     private long nextShot = currentTime; // próximo momento em que o jogador pode disparar
     private final double radius = 12.0; // raio(tamanho) do jogador
     
+    public Player(){
+        super(GameLib.WIDTH / 2, GameLib.HEIGHT * 0.90);
+    }
 
     public double getState(){return state;}
     public double getX(){return X;}
@@ -32,7 +34,7 @@ public class Player extends Game_Explodable{
 
     public void readyToShoot(){ // avalia se o inimigo pode atirar e atira
         if(currentTime > nextShot){
-            Projectile newProjectile = new Projectile(X, (Y - 2 * radius), 0.0, -1.0);
+            Projectile newProjectile = new projectilePlayer(X, (Y - 2 * radius), 0.0, -1.0);
             nextShot = currentTime + 100;
         }
     }

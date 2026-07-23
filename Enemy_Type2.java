@@ -1,3 +1,5 @@
+import java.awt.Color;
+
 public class Enemy_Type2 extends Enemy{
     private double spawnX; // coordenada X em que o próximo inimigo 2 irá spawnar
     private static long nextEnemy2 = currentTime + 7000; // próximo momento em que um inimigo 2 pode aparecer(nn sei onde muda)
@@ -53,11 +55,11 @@ public class Enemy_Type2 extends Enemy{
     }
 
     private void Shoot(){ // o tipo de inimigo 2 dispara 3 projéteis ao mesmo tempo, então terá que criar 3 projéteis com ângulos diferentes
-        for(i = 0; i < 3; i++){
+        for(int i = 0; i < 3; i++){
             double angle = Math.PI/2 - Math.PI/8 + Math.PI/8 * i; //dois projéteis + e - Math.PI/8(22.5 graus) em relação a Math.PI/2(90 graus), e um exatamente em 90 graus
 
             double a = angle + Math.random() * Math.PI/6 - Math.PI/12; //tbm nao entendi essa conta
-            Projectile newProjectile = new Projectile(X, Y, Math.cos(a) * 0.3, Math.sin(a) * 0.3);
+            Projectile newProjectile = new projectileEnemy(X, Y, Math.cos(a) * 0.3, Math.sin(a) * 0.3);
         }
     }
 

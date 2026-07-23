@@ -1,6 +1,6 @@
 import java.awt.Color;
 
-public class Background{
+public class Background extends Game_Object{
     protected double speed;
     protected double width;
     protected double height;

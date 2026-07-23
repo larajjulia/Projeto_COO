@@ -24,7 +24,7 @@ public abstract class Enemy extends Game_Explodable{
     }
 
     protected boolean hasExploded(long currentTime){ // avalia se o inimigo foi explodido
-        if(state = EXPLODING && currentTime > explosionEnd) return true;
+        if(state == EXPLODING && currentTime > explosionEnd) return true;
         else return false;
     }
 

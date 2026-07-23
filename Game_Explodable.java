@@ -29,9 +29,5 @@ public class Game_Explodable{
         }
         else return false;
      }
-<<<<<<< HEAD
-}
-=======
 
 }
->>>>>>> 3577c69b044e398b2aaa4257c70e4d926cc502cd

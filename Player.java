@@ -1,6 +1,6 @@
 import java.awt.Color;
 
-public class Player extends Game_Explodable{
+public class Player<T extends Interface> extends Game_Explodable {
     private double velocityX = 0.25; // velocidade no eixo X
     private double velocityY = 0.25; // velocidade no eixo Y
     private long nextShot = currentTime; // próximo momento em que o jogador pode disparar
@@ -13,6 +13,9 @@ public class Player extends Game_Explodable{
     public double getState(){return state;}
     public double getX(){return X;}
     public double getY(){return Y;}
+    public double getVelocityX(){return velocityX;}
+    public double getVelocityY(){return velocityY;}
+    
 
     public void updateX(){ // conserta a coordenada X se o jogador estiver fora da cena do jogo (após input)
         if(X < 0.0) X = 0.0;
@@ -40,10 +43,16 @@ public class Player extends Game_Explodable{
     }
 
     public void visualPlayer(){ // faz a parte visual do jogador
-        if(state == EXPLODING) GameLib.drawExplosion(X, Y, (currentTime - explosionStart) / (explosionEnd - explosionStart));
-        else{
+        if(!visualExplosion()){
             GameLib.setColor(Color.BLUE);
-			GameLib.drawPlayer(X, Y, radius);
+		    GameLib.drawPlayer(X, Y, radius);
+        }
+    }
+
+    public void collisionPlayer(Interface element){
+        double dist = (double) getDist(element);
+	    if(dist < (radius + element.getRadius()) * 0.8){
+			explode();
         }
     }
 }

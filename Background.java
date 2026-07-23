@@ -19,6 +19,7 @@ public class Background{
     public static Background Background_1(){ // atalhos para a criação dos dois tipos de background
         return new Background(0.07, 2, 2, Color.DARK_GRAY);
     }
+    
     public static Background Background_2(){
         return new Background(0.045, 3, 3, Color.GRAY);
     }

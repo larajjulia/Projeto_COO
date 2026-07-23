@@ -63,7 +63,7 @@ public class Enemy_Type2 extends Enemy{
 
 
 
-    public addEnemy2(){ //spawna novo inimigo se puder
+    public void addEnemy2(){ //spawna novo inimigo se puder
         if(currentTime > nextEnemy2){
             Enemy enemy = new Enemy_Type2(spawnX, -10.0, 0.42, (3 * Math.PI) / 2, 0.0);
         }

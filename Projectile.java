@@ -2,7 +2,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Projectile extends Game_Object {
+public class Projectile extends Game_Object implements Interface{
     private double velocityX; // velocidade no eixo X
     private double velocityY; // velocidade no eixo Y
     private Color color;

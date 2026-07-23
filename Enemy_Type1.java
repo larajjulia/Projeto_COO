@@ -2,9 +2,11 @@ import java.awt.Color;
 public class Enemy_Type1 extends Enemy{
     private long nextShot = currentTime; // próximo momento em que o inimigo 1 pode disparar
     private long nextEnemy1 = currentTime + 2000; // próximo momento em que um inimigo 1 pode aparecer
-    private final double radius = 9.0; // raio(tamanho) do inimigo 1
+    
+
     public Enemy_Type1(double X, double Y, double velocity, double angle, double velocityRotation){
         super(X, Y, velocity, angle, velocityRotation);
+        this.radius = 9.0; // raio(tamanho) do inimigo 1
         nextEnemy1 = currentTime + 500;
         nextShot = currentTime + 500; //pq q ele muda quando cria uma instancia??
     }

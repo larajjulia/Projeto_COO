@@ -3,10 +3,11 @@ public class Enemy_Type2 extends Enemy{
     private double spawnX; // coordenada X em que o próximo inimigo 2 irá spawnar
     private long nextEnemy2 = currentTime + 7000; // próximo momento em que um inimigo 2 pode aparecer(nn sei onde muda)
     private static int enemyCount; // contagem de inimigos 2
-    private final double radius = 12; // raio(tamanho) do inimigo 2
+     
     public Enemy_Type2(double X, double Y, double velocity, double angle, double velocityRotation){
         super(X, Y, velocity, angle, velocityRotation);
         enemyCount++;
+        this.radius = 12; // raio(tamanho) do inimigo 2
         if(enemyCount < 10) nextEnemy2 = currentTime + 120;
         else{
             //isso aqui eu tbm nn consertei, mto confuso
@@ -15,6 +16,7 @@ public class Enemy_Type2 extends Enemy{
 			nextEnemy2 = (long) (currentTime + 3000 + Math.random() * 3000);
         }
     }
+
     @Override
     public boolean onScreen(){
         if(hasExploded(currentTime) || X < -10 || X > GameLib.WIDTH + 10) state = INACTIVE; // se o inimigo tiver saído da tela ou explodido, está inativo

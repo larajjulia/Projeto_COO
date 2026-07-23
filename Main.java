@@ -92,14 +92,16 @@ public class Main {
 				/* colisões player - inimigos */
 							
 				for (Enemy item : Enemy.listEnemies)
-				 collisionPlayer(item);
+				 player1.collisionPlayer(item);
 				
 			}
 			
 			/* colisões projeteis (player) - inimigos */
-
-			for (Projectile item : Projectile.listProjectiles)
-				collisionEnemy(item);
+			for (Enemy itemEnemy : Enemy.listEnemies){
+				for (Projectile item : Projectile.listProjectiles){
+					itemEnemy.collisionEnemy(item);
+				}
+			}
 				
 			/***************************/
 			/* Atualizações de estados */

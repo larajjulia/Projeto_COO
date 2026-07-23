@@ -2,10 +2,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Projectile{
-    protected double state = INACTIVE;
-    protected double X;
-    protected double Y;
+public class Projectile extends Game_Object{
     private double velocityX; // velocidade no eixo X
     private double velocityY; // velocidade no eixo Y
     private Color color;
@@ -13,9 +10,7 @@ public class Projectile{
 
 
     private Projectile(double X, double Y, double velocityX, double velocityY, Color color){
-        state = ACTIVE;
-        this.X = X;
-        this.Y = Y;
+        super(X, Y);
         this.velocityX = velocityX;
         this.velocityY = velocityY;
         listProjectiles.add(this);

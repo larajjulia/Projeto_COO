@@ -12,8 +12,19 @@ public class Game_Object<T extends Interface>{
 		
 			
 	/* Já a variável "currentTime" nos dá o timestamp atual.  */
+    
     public static long currentTime = System.currentTimeMillis();
     public static long delta = System.currentTimeMillis() - currentTime;
+
+    public static void updateTime(){
+        long now = System.currentTimeMillis();
+    	Game_Object.delta = now - Game_Object.currentTime;
+    	Game_Object.currentTime = now;
+    }
+
+    // public long getCurrentTime(){return currentTime;}
+    // public long getDelta(){return delta;}
+
     
     protected Game_Object(double X, double Y){
         this.state = ACTIVE;

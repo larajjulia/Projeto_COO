@@ -2,16 +2,16 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Projectile extends Game_Object implements Interface{
-    private double velocityX; // velocidade no eixo X
-    private double velocityY; // velocidade no eixo Y
-    private Color color;
-    private double radius = 2.0; //tamanho do projétil INIMIGO, cpa é melhor dividir em duas classes: player e inimigo
+public abstract class Projectile extends Game_Object implements Interface{
+    protected double velocityX; // velocidade no eixo X
+    protected double velocityY; // velocidade no eixo Y
+    protected Color color;
+    private final double radius = 2.0;
     public static List<Projectile> listProjectiles = new ArrayList<Projectile>();
 
 
 
-    private Projectile(double X, double Y, double velocityX, double velocityY){
+    protected Projectile(double X, double Y, double velocityX, double velocityY){
         super(X, Y);
         this.velocityX = velocityX;
         this.velocityY = velocityY;
@@ -22,13 +22,14 @@ public class Projectile extends Game_Object implements Interface{
     public double getY(){return Y;}
     public double getRadius(){return radius;}
 
+
     public static Projectile projectilePlayer(double X, double Y, double velocityX, double velocityY){ // atalhos para a criação dos dois tipos de projétil
-        Projectile projectile = new Projectile(X, Y, velocityX, velocityY);
+        Projectile projectile = new Projectile_Player(X, Y, velocityX, velocityY);
         projectile.color = Color.GREEN;
         return projectile; 
     }
     public static Projectile projectileEnemy(double X, double Y, double velocityX, double velocityY){
-        Projectile projectile = new Projectile(X, Y, velocityX, velocityY);
+        Projectile projectile = new Projectile_Enemy(X, Y, velocityX, velocityY);
         projectile.color = Color.RED;
         return projectile; 
     }
@@ -47,20 +48,5 @@ public class Projectile extends Game_Object implements Interface{
     
     }
 
-    public void visualProjectile(){ // faz a parte visual dos projéteis, ta feio
-        
-            if(color == Color.GREEN){
-                GameLib.setColor(Color.GREEN);
-                GameLib.drawLine(X, Y - 5, X, Y + 5);
-                GameLib.drawLine(X - 1, Y - 3, X - 1, Y + 3);
-                GameLib.drawLine(X + 1, Y - 3, X + 1, Y + 3);
-            }
-            else{
-                GameLib.setColor(Color.RED);
-                GameLib.drawCircle(X, Y, radius);
-            }
-        
-    }
-
-    
+    public abstract void visualProjectile();
 }

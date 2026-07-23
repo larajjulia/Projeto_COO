@@ -29,9 +29,9 @@ public abstract class Enemy<T extends Interface> extends Game_Explodable impleme
     }
     protected abstract boolean onScreen(); // avalia se está inativo ou ativo no momento
     public void updatePosition(){ // atualiza posições X e Y e ângulo calculando o deslocamento
-        if(onScreen()){
+        if(onScreen() && state != INACTIVE){
             X += velocity * Math.cos(angle) * delta;
-            Y += velocity * Math.cos(angle) * delta * (-1.0);
+            Y += velocity * Math.sin(angle) * delta * (-1.0);
             angle += velocityRotation * delta;
         }
         else listEnemies.remove(this);
@@ -43,8 +43,9 @@ public abstract class Enemy<T extends Interface> extends Game_Explodable impleme
     protected abstract void visualEnemies(); // faz a parte visual dos inimigos
 
     public void collisionEnemy(T element){
+        if (state != ACTIVE) return;
         double dist = getDist(element);
-	    if(dist < element.getRadius()){
+	    if(dist < (getRadius() + element.getRadius())*0.8){
 			explode();
 		}
     }

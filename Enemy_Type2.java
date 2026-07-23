@@ -1,7 +1,7 @@
 import java.awt.Color;
 public class Enemy_Type2 extends Enemy{
     private double spawnX; // coordenada X em que o próximo inimigo 2 irá spawnar
-    private long nextEnemy2 = currentTime + 7000; // próximo momento em que um inimigo 2 pode aparecer(nn sei onde muda)
+    private static long nextEnemy2 = currentTime + 7000; // próximo momento em que um inimigo 2 pode aparecer(nn sei onde muda)
     private static int enemyCount; // contagem de inimigos 2
      
     public Enemy_Type2(double X, double Y, double velocity, double angle, double velocityRotation){
@@ -26,10 +26,10 @@ public class Enemy_Type2 extends Enemy{
 
     @Override
     public void readyToShoot(Player player){ // avalia se é hora de lançar um projétil
+        updatePosition();
         if(!onScreen()) return;
         double previousY = Y;
         double threshold = GameLib.HEIGHT * 0.3;
-        updatePosition();
          // eu nao corrigi essa parte pq nao entendi DDD; dar uma melhorada
         if(previousY < threshold && Y >= threshold){
             if(X < GameLib.WIDTH / 2) velocityRotation = 0.003;

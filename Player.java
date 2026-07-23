@@ -15,6 +15,7 @@ public class Player<T extends Interface> extends Game_Explodable {
     public double getY(){return Y;}
     public double getVelocityX(){return velocityX;}
     public double getVelocityY(){return velocityY;}
+    public double getRadius(){return radius;}
     
 
     public void updateX(){ // conserta a coordenada X se o jogador estiver fora da cena do jogo (após input)
@@ -51,8 +52,15 @@ public class Player<T extends Interface> extends Game_Explodable {
 
     public void collisionPlayer(Interface element){
         double dist = (double) getDist(element);
-	    if(dist < (radius + element.getRadius()) * 0.8){
+	    if(dist < (getRadius() + element.getRadius()) * 0.8){
 			explode();
         }
+    }
+
+    public void movement(){
+        if(GameLib.iskeyPressed(GameLib.KEY_UP)) Y -= delta * velocityY;
+		if(GameLib.iskeyPressed(GameLib.KEY_DOWN)) Y += delta * velocityY;
+		if(GameLib.iskeyPressed(GameLib.KEY_LEFT)) X -= delta * velocityX;
+		if(GameLib.iskeyPressed(GameLib.KEY_RIGHT)) X += delta * velocityX;
     }
 }

@@ -1,7 +1,7 @@
 import java.awt.Color;
 public class Enemy_Type1 extends Enemy{
     private long nextShot = currentTime; // próximo momento em que o inimigo 1 pode disparar
-    private long nextEnemy1 = currentTime + 2000; // próximo momento em que um inimigo 1 pode aparecer
+    private static long nextEnemy1 = currentTime + 2000; // próximo momento em que um inimigo 1 pode aparecer
     
 
     public Enemy_Type1(double X, double Y, double velocity, double angle, double velocityRotation){
@@ -19,8 +19,8 @@ public class Enemy_Type1 extends Enemy{
 
     @Override
     public void readyToShoot(Player player){ // avalia se o inimigo pode atirar e atira
-        if(!onScreen()) return;
         updatePosition();
+        if(!onScreen()) return;
         if(currentTime > nextShot && Y < player.getY()){ // se o inimigo puder lançar um projétil e
             Projectile newProjectile = Projectile.projectileEnemy(X, Y, Math.cos(angle) * (0.45), Math.sin(angle) * (-0.45)); // cria um novo projétil
         }

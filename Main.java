@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.util.ArrayList;
 
 /***********************************************************************/
 /*                                                                     */
@@ -36,13 +37,13 @@ public class Main {
 
 		/* variáveis dos projéteis disparados pelo player */
 		
-		Projectile projectile_player = Projectile.projectilePlayer(0.0, 0.0, 0.0, 0.0); 					
+		Projectile projectile_player = Projectile.projectilePlayer(GameLib.WIDTH / 2, GameLib.HEIGHT * 0.90 - player1.getRadius(), 1.25, 1.25); 					
 		/* variáveis dos inimigos tipo 1 */
 		
-		Enemy enemy1 = new Enemy_Type1(0.0, 0.0, 0.0, 0.0, 0.0);
+		Enemy enemy1 = new Enemy_Type1(GameLib.WIDTH / 8, GameLib.HEIGHT - 20, 0.25, 0.0, 0.5);
 
 		/* variáveis dos inimigos tipo 2 */
-		Enemy enemy2 = new Enemy_Type2(0.0, 0.0, 0.0, 0.0, 0.0);
+		Enemy enemy2 = new Enemy_Type2(GameLib.WIDTH / 2, GameLib.HEIGHT - 50, 0.25, 0.0, 0.5);
 		
 		/* variáveis dos projéteis lançados pelos inimigos (tanto tipo 1, quanto tipo 2) */
 		Projectile projectile_enemy1 = Projectile.projectileEnemy(0.0, 0.0, 0.0, 0.0); 
@@ -77,7 +78,12 @@ public class Main {
 		/*************************************************************************************************/
 		
 		while(running){
-			
+
+			// public static long currentTime = System.currentTimeMillis();
+    		// public static long delta = System.currentTimeMillis() - currentTime;
+
+			Game_Object.updateTime();
+
 			/***************************/
 			/* Verificação de colisões */
 			/***************************/
@@ -99,7 +105,8 @@ public class Main {
 			/* colisões projeteis (player) - inimigos */
 			for (Enemy itemEnemy : Enemy.listEnemies){
 				for (Projectile item : Projectile.listProjectiles){
-					itemEnemy.collisionEnemy(item);
+					if (item instanceof Projectile_Player) 
+						itemEnemy.collisionEnemy(item);
 				}
 			}
 				
@@ -109,7 +116,7 @@ public class Main {
 			
 			/* projeteis (player e inimigos) */
 
-			for (Projectile item : Projectile.listProjectiles)
+			for (Projectile item : new ArrayList<>(Projectile.listProjectiles))
 				item.updateState();
 			
 			/* projeteis (inimigos) */
@@ -117,12 +124,12 @@ public class Main {
 			
 			/* inimigos tipo 1 */
 
-			for (Enemy item : Enemy.listEnemies)
+			for (Enemy item : new ArrayList<>(Enemy.listEnemies))
 				item.readyToShoot(player1);
 
 			/* verificando se novos inimigos devem ser "lançados" */
 			
-			for (Enemy element : Enemy.listEnemies)
+			for (Enemy element : new ArrayList<>(Enemy.listEnemies))
 				element.addEnemy();
 		
 			
@@ -135,20 +142,9 @@ public class Main {
 			/********************************************/
 			
 			if(player1.getState() == ACTIVE){
-				double playerY = player1.getY();
-				double playerX = player1.getX();
-				double playerVX = player1.getVelocityX();
-				double playerVY = player1.getVelocityY();
-				long delta = Game_Object.delta;
-				
-				
-				if(GameLib.iskeyPressed(GameLib.KEY_UP)) playerY -= delta * playerVY;
-				if(GameLib.iskeyPressed(GameLib.KEY_DOWN)) playerX += delta * playerVY;
-				if(GameLib.iskeyPressed(GameLib.KEY_LEFT)) playerX -= delta * playerVX;
-				if(GameLib.iskeyPressed(GameLib.KEY_RIGHT)) playerX += delta * playerVY;
+				player1.movement();
 				
 				if(GameLib.iskeyPressed(GameLib.KEY_CONTROL)) {
-					
 					player1.readyToShoot(); /* checando se o player pode atirar */
 				}
 			}
@@ -180,15 +176,14 @@ public class Main {
 			/* deenhando projeteis (player) */
 			/* desenhando projeteis (inimigos) */
 			
-			projectile_player.visualProjectile();
-			projectile_enemy1.visualProjectile();
-			
+			for (Projectile item : Projectile.listProjectiles)
+				item.visualProjectile();
 			
 			/* desenhando inimigos (tipo 1) */
 			/* desenhando inimigos (tipo 2) */
 			
-			enemy1.visualEnemies();
-			enemy2.visualEnemies();
+			for (Enemy item : Enemy.listEnemies)
+				item.visualEnemies();
 			
 			
 			/* chamada a display() da classe GameLib atualiza o desenho exibido pela interface do jogo. */

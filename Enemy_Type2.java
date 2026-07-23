@@ -2,7 +2,7 @@ import java.awt.Color;
 
 public class Enemy_Type2 extends Enemy{
     private double spawnX; // coordenada X em que o próximo inimigo 2 irá spawnar
-    private static long nextEnemy2 = currentTime + 7000; // próximo momento em que um inimigo 2 pode aparecer(nn sei onde muda)
+    private long nextEnemy2 = currentTime + 7000; // próximo momento em que um inimigo 2 pode aparecer(nn sei onde muda)
     private static int enemyCount; // contagem de inimigos 2
     private final double radius = 12; // raio(tamanho) do inimigo 2
 
@@ -59,7 +59,7 @@ public class Enemy_Type2 extends Enemy{
             double angle = Math.PI/2 - Math.PI/8 + Math.PI/8 * i; //dois projéteis + e - Math.PI/8(22.5 graus) em relação a Math.PI/2(90 graus), e um exatamente em 90 graus
 
             double a = angle + Math.random() * Math.PI/6 - Math.PI/12; //tbm nao entendi essa conta
-            Projectile newProjectile = new projectileEnemy(X, Y, Math.cos(a) * 0.3, Math.sin(a) * 0.3);
+            Projectile newProjectile = Projectile.projectileEnemy(X, Y, Math.cos(a) * 0.3, Math.sin(a) * 0.3);
         }
     }
 
@@ -74,7 +74,7 @@ public class Enemy_Type2 extends Enemy{
 
     @Override
     public void visualEnemies(){
-        if(!visualExplosion){
+        if(!visualExplosion()){
             GameLib.setColor(Color.MAGENTA);
             GameLib.drawDiamond(X, Y, radius);
         }

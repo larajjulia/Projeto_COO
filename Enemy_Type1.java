@@ -2,7 +2,7 @@ import java.awt.Color;
 
 public class Enemy_Type1 extends Enemy{
     private long nextShot = currentTime; // próximo momento em que o inimigo 1 pode disparar
-    private static long nextEnemy1 = currentTime + 2000; // próximo momento em que um inimigo 1 pode aparecer
+    private long nextEnemy1 = currentTime + 2000; // próximo momento em que um inimigo 1 pode aparecer
     private final double radius = 9.0; // raio(tamanho) do inimigo 1
 
     public Enemy_Type1(double X, double Y, double velocity, double angle, double velocityRotation){
@@ -23,7 +23,7 @@ public class Enemy_Type1 extends Enemy{
 
         updatePosition();
         if(currentTime > nextShot && Y < player.getY()){ // se o inimigo puder lançar um projétil e
-            Projectile newProjectile = new projectileEnemy(X, Y, Math.cos(angle) * (0.45), Math.sin(angle) * (-0.45)); // cria um novo projétil
+            Projectile newProjectile = Projectile.projectileEnemy(X, Y, Math.cos(angle) * (0.45), Math.sin(angle) * (-0.45)); // cria um novo projétil
         }
 
         nextShot = (long) (currentTime + 200 + Math.random() * 500); // atualiza o tempo de espera até o próxmo projétil
@@ -37,7 +37,7 @@ public class Enemy_Type1 extends Enemy{
 
     @Override
     public void visualEnemies(){
-        if(!visualExplosion){
+        if(!visualExplosion()){
             GameLib.setColor(Color.CYAN);
             GameLib.drawCircle(X, Y, radius);
         }

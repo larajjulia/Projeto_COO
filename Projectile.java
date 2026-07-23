@@ -6,6 +6,7 @@ public class Projectile extends Game_Object{
     private double velocityX; // velocidade no eixo X
     private double velocityY; // velocidade no eixo Y
     private Color color;
+    private double radius = 2.0; //tamanho do projétil INIMIGO, cpa é melhor dividir em duas classes: player e inimigo
     public static List<Projectile> listProjectiles = new ArrayList<Projectile>();
 
 

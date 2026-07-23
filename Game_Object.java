@@ -5,8 +5,8 @@ public class Game_Object{
     protected int state = INACTIVE;
     protected double X;
     protected double Y;
-    public long currentTime = System.currentTimeMillis();
-    public long delta = System.currentTimeMillis() - currentTime;
+    public static long currentTime = System.currentTimeMillis();
+    public static long delta = System.currentTimeMillis() - currentTime;
     
 
 

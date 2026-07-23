@@ -1,13 +1,13 @@
 import java.awt.Color;
 
-public class Background extends Game_Object{
+public class Background{
     protected double speed;
     protected double width;
     protected double height;
     private double X;
     private double Y;
     private Color color;
-    private static double count;
+    private double count;
 
     private Background(double speed, double width, double height, Color color){
         this.speed = speed; 
@@ -26,7 +26,7 @@ public class Background extends Game_Object{
 
 
     public void updateDelta(){
-        count += speed * delta;
+        count += speed * (double) Game_Object.delta;
     }
 
     public void visualBackground(){ // dado uma cor, preenche o fundo

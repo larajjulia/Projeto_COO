@@ -22,9 +22,9 @@ public class Enemy_Type1 extends Enemy{
         updatePosition();
         if(!onScreen()) return;
         if(currentTime > nextShot && Y < player.getY()){ // se o inimigo puder lançar um projétil e
-            Projectile newProjectile = Projectile.projectileEnemy(X, Y, Math.cos(angle) * (0.45), Math.sin(angle) * (-0.45)); // cria um novo projétil
+            Projectile newProjectile = Projectile.projectileEnemy(X, Y, Math.cos(angle) * (0.45), Math.sin(angle) * (0.45) * (-1.0)); // cria um novo projétil
+            nextShot = (long) (currentTime + 200 + Math.random() * 500); // atualiza o tempo de espera até o próxmo projétil
         }
-        nextShot = (long) (currentTime + 200 + Math.random() * 500); // atualiza o tempo de espera até o próxmo projétil
     }
     public void addEnemy(){ // spawna novo inimigo se puder
         if(currentTime > nextEnemy1){

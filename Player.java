@@ -51,6 +51,7 @@ public class Player<T extends Interface> extends Game_Explodable {
     }
 
     public void collisionPlayer(Interface element){
+        if (state != ACTIVE) return;
         double dist = (double) getDist(element);
 	    if(dist < (getRadius() + element.getRadius()) * 0.8){
 			explode();

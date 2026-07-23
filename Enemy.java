@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
-public abstract class Enemy<T extends Interface> extends Game_Explodable implements Interface{
+public abstract class Enemy extends Game_Explodable implements Interface{
     protected double velocity; // velocidade geral
     protected double angle; // ângulo de movimentação
     protected double velocityRotation; // velocidade da rotação
@@ -42,7 +42,7 @@ public abstract class Enemy<T extends Interface> extends Game_Explodable impleme
 
     protected abstract void visualEnemies(); // faz a parte visual dos inimigos
 
-    public void collisionEnemy(T element){
+    public void collisionEnemy(Interface element){
         if (state != ACTIVE) return;
         double dist = getDist(element);
 	    if(dist < (getRadius() + element.getRadius())*0.8){

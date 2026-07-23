@@ -163,10 +163,11 @@ public class Main {
 			/*******************/
 			
 			/* desenhando plano fundo distante */
-			
-			GameLib.setColor(Color.DARK_GRAY);
-			
+
+			bg1.updateDelta();
 			bg1.visualBackground();
+
+			bg2.updateDelta();
 			bg2.visualBackground();
 
 			/* desenhando player */

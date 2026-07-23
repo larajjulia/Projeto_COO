@@ -26,14 +26,14 @@ public class Enemy_Type2 extends Enemy{
 
     @Override
     public void readyToShoot(Player player){ // avalia se é hora de lançar um projétil
+        double previousY = Y;
         updatePosition();
         if(!onScreen()) return;
-        double previousY = Y;
         double threshold = GameLib.HEIGHT * 0.3;
          // eu nao corrigi essa parte pq nao entendi DDD; dar uma melhorada
         if(previousY < threshold && Y >= threshold){
             if(X < GameLib.WIDTH / 2) velocityRotation = 0.003;
-            else velocityRotation = -0.03;
+            else velocityRotation = -0.003;
         }
         if(velocityRotation > 0 && Math.abs(angle - 3 * Math.PI) < 0.05){
             velocityRotation = 0.0;
@@ -61,6 +61,7 @@ public class Enemy_Type2 extends Enemy{
             Enemy enemy = new Enemy_Type2(spawnX, -10.0, 0.42, (3 * Math.PI) / 2, 0.0);
         }
     }
+    
     @Override
     public void visualEnemies(){
         if(!visualExplosion()){

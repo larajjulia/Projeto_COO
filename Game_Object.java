@@ -1,7 +1,7 @@
 public class Game_Object{
     public static final int INACTIVE = 0;
-	  public static final int ACTIVE = 1;
-	  public static final int EXPLODING = 2;
+	public static final int ACTIVE = 1;
+	public static final int EXPLODING = 2;
     protected state = INACTIVE;
     protected double X;
     protected double Y;

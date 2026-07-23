@@ -40,6 +40,5 @@ public abstract class Enemy extends Game_Explodable{
     }
 
 
-    protected abstract void visualEnemiesActive(); // faz o visual de cada inimigo (que difere quando estão ativos)
     protected abstract void visualEnemies(); // faz a parte visual dos inimigos
 }

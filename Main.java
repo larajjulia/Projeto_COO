@@ -137,6 +137,7 @@ public class Main {
 				double playerX = player1.getX();
 				double playerVX = player1.getVelocityX();
 				double playerVY = player1.getVelocityY();
+				long delta = Game_Object.delta;
 				
 				
 				if(GameLib.iskeyPressed(GameLib.KEY_UP)) playerY -= delta * playerVY;
@@ -184,8 +185,8 @@ public class Main {
 			/* desenhando inimigos (tipo 1) */
 			/* desenhando inimigos (tipo 2) */
 			
-			enemy1.visualEnemy();
-			enemy2.visualEnemy();
+			enemy1.visualEnemies();
+			enemy2.visualEnemies();
 			
 			
 			/* chamada a display() da classe GameLib atualiza o desenho exibido pela interface do jogo. */
@@ -194,7 +195,7 @@ public class Main {
 			
 			/* faz uma pausa de modo que cada execução do laço do main loop demore aproximadamente 3 ms. */
 			
-			busyWait(currentTime + 3);
+			busyWait(Game_Object.currentTime + 3);
 		}
 		
 		System.exit(0);

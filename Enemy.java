@@ -31,6 +31,7 @@ public abstract class Enemy<T extends Interface> extends Game_Explodable{
     }
 
     protected abstract void addEnemy();
+    protected abstract void readyToShoot(Player player); 
 
     protected abstract void visualEnemies(); // faz a parte visual dos inimigos
 

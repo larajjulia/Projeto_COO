@@ -21,7 +21,9 @@ public class Enemy_Type2 extends Enemy{
         if(state == INACTIVE) return false;
         else return true;
     }
-    private void readyToShoot(Player player, int delta, int currentTime){ // avalia se é hora de lançar um projétil
+
+    @Override
+    public void readyToShoot(Player player){ // avalia se é hora de lançar um projétil
         if(!onScreen()) return;
         double previousY = Y;
         double threshold = GameLib.HEIGHT * 0.3;

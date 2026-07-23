@@ -14,6 +14,8 @@ public class Enemy_Type1 extends Enemy{
         if(state == INACTIVE) return false;
         else return true;
     }
+
+    @Override
     public void readyToShoot(Player player){ // avalia se o inimigo pode atirar e atira
         if(!onScreen()) return;
         updatePosition();

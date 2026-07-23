@@ -6,7 +6,7 @@ public class Game_Explodable{
     protected double explosionEnd; // instante do fim da explosão
 
 
-    protected Game_Object(double X, double Y){
+    protected void Game_Object(double X, double Y){
         state = ACTIVE;
         this.X = X;
         this.Y = Y;
@@ -25,5 +25,4 @@ public class Game_Explodable{
         }
         else return false;
      }
-
 }

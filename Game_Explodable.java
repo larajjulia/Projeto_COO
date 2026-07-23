@@ -1,6 +1,6 @@
 public class Game_Explodable extends Game_Object{
-    protected double explosionStart; // instante do inicio da explosão
-    protected double explosionEnd; // instante do fim da explosão
+    protected long explosionStart; // instante do inicio da explosão
+    protected long explosionEnd; // instante do fim da explosão
 
 
     protected Game_Explodable(double X, double Y){

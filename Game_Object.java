@@ -2,10 +2,10 @@ public class Game_Object{
     public static final int INACTIVE = 0;
 	public static final int ACTIVE = 1;
 	public static final int EXPLODING = 2;
-    protected state = INACTIVE;
+    protected int state = INACTIVE;
     protected double X;
     protected double Y;
-    public double currentTime = System.currentTimeMillis();
+    public long currentTime = System.currentTimeMillis();
     public long delta = System.currentTimeMillis() - currentTime;
     
 

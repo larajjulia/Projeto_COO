@@ -6,21 +6,26 @@ public class Projectile extends Game_Object{
     private double velocityX; // velocidade no eixo X
     private double velocityY; // velocidade no eixo Y
     private Color color;
-    public static List<Projectile> listProjectiles = new ArrayList<Projectiles>();
+    public static List<Projectile> listProjectiles = new ArrayList<Projectile>();
 
 
-    private Projectile(double X, double Y, double velocityX, double velocityY, Color color){
+    private Projectile(double X, double Y, double velocityX, double velocityY){
         super(X, Y);
         this.velocityX = velocityX;
         this.velocityY = velocityY;
         listProjectiles.add(this);
     }
 
-    public static Projectile projectilePlayer(double X, double Y, double velocityX, double velocityY, Color color){ // atalhos para a criação dos dois tipos de projétil
-        return new Projectile(X, Y, velocityX, velocityY, Color.GREEN);
+    public static Projectile projectilePlayer(double X, double Y, double velocityX, double velocityY){ // atalhos para a criação dos dois tipos de projétil
+        Projectile projectile = new Projectile(X, Y, velocityX, velocityY);
+        projectile.color = Color.GREEN;
+        return projectile; 
     }
-    public static Projectile projectileEnemy(double X, double Y, double velocityX, double velocityY, Color color){
-        return new Projectile(X, Y, velocityX, velocityY, Color.RED);
+    public static Projectile projectileEnemy(double X, double Y, double velocityX, double velocityY){
+        Projectile projectile = new Projectile(X, Y, velocityX, velocityY);
+        projectile.color = Color.RED;
+        return projectile; 
+
     }
 
 
@@ -39,7 +44,7 @@ public class Projectile extends Game_Object{
 
     public void visualProjectile(){ // faz a parte visual dos projéteis, ta feio
         
-            if(projectile.color = Color.GREEN){
+            if(color == Color.GREEN){
                 GameLib.setColor(Color.GREEN);
                 GameLib.drawLine(X, Y - 5, X, Y + 5);
                 GameLib.drawLine(X - 1, Y - 3, X - 1, Y + 3);

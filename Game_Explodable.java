@@ -6,7 +6,7 @@ public class Game_Explodable{
     protected double explosionEnd; // instante do fim da explosão
 
 
-    protected Game_Object(double X, double Y){
+    protected Game_Explodable(double X, double Y){
         state = ACTIVE;
         this.X = X;
         this.Y = Y;

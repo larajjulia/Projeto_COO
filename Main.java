@@ -10,12 +10,15 @@ import java.util.ArrayList;
 /*                                                                     */
 /***********************************************************************/
 
+//Função para controlar o comportamento do boss
+
+
 public class Main {
     public static final int ACTIVE = Game_Object.ACTIVE;
     public static final int INACTIVE = Game_Object.INACTIVE;
     public static final int EXPLODING = Game_Object.EXPLODING;
 	public static final long initialTime = System.currentTimeMillis(); //tempo de inicio do jogo
-	public static Boss_1 bossAtivo = null;
+	public static Boss bossAtivo = null; // indica a presença ou não de boss
 	/* Espera, sem fazer nada, até que o instante de tempo atual seja */
 	/* maior ou igual ao instante especificado no parâmetro "time.    */
 	
@@ -31,7 +34,6 @@ public class Main {
 		/* Indica que o jogo está em execução */
 
 		boolean running = true;
-		boolean boss = false;
 
 		/* variáveis do player */
 		
@@ -110,7 +112,7 @@ public class Main {
 			
 			/* colisões projeteis (player) - inimigos */
 			for (Enemy itemEnemy : Enemy.listEnemies){
-				if(itemEnemy instanceof Powerup_1) continue;
+				if(itemEnemy instanceof Powerup) continue;
 				for (Projectile item : Projectile.listProjectiles){
 					if (item instanceof Projectile_Player) 
 						itemEnemy.collisionEnemy(item);
@@ -201,19 +203,16 @@ public class Main {
 			
 
 			//começo do setup dos bosses
-			if(Game_Object.currentTime - initialTime >= 3000 && boss == false){
-				for (Enemy item : Enemy.listEnemies){
-					item.nextEnemy((long)10000000);
-				}
-				bossAtivo = new Boss_1(GameLib.WIDTH/2, -10.0, 0.20, Math.PI/2, 0.0);
-				bossAtivo.visualEnemies();
-				boss = true;
-	
+			if(Game_Object.currentTime - initialTime >= 3000 && bossAtivo == null){
+				bossAtivo = Boss.bossApplication(2);
 			}
 
-			if(boss == true){
-				bossAtivo.adjustMovement();
+			if(bossAtivo != null){
+				if(bossAtivo.hasExploded()) bossAtivo = null;
+				else bossAtivo.adjustMovement();
 			}
+
+			
 			/* chamada a display() da classe GameLib atualiza o desenho exibido pela interface do jogo. */
 			
 			GameLib.display();
@@ -225,4 +224,5 @@ public class Main {
 		
 		System.exit(0);
 	}
+
 }

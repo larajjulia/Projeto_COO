@@ -28,13 +28,13 @@ public abstract class Enemy extends Game_Explodable implements Interface{
         explode(500);
     }
 
-    protected boolean hasExploded(long currentTime){ // avalia se o inimigo foi explodido
-        if(state == EXPLODING && currentTime > explosionEnd) return true;
+    protected boolean hasExploded(){ // avalia se o inimigo foi explodido
+        if(state == EXPLODING && Game_Object.currentTime > explosionEnd) return true;
         else return false;
     }
 
     protected boolean onScreen(){ // avalia se está inativo ou ativo no momento
-        if(hasExploded(currentTime) || Y < -10 || X > GameLib.HEIGHT + 10) state = INACTIVE; // se o inimigo tiver saído da tela ou explodido, está inativo
+        if(hasExploded() || Y < -10 || X > GameLib.HEIGHT + 10) state = INACTIVE; // se o inimigo tiver saído da tela ou explodido, está inativo
         if(state == INACTIVE) return false;
         else return true;
     }; 
@@ -59,8 +59,11 @@ public abstract class Enemy extends Game_Explodable implements Interface{
 		}
     }
 
-    public void removeEnemies(){
-
+    public void setupEnemies(){ // inicializa instancias de enemies
+        new Enemy_Type1(GameLib.WIDTH / 8, -10.0, 0.0, 0.0, 0.5);
+		new Powerup_1(GameLib.WIDTH / 3, -9.0, 0.0, 0.0, 0.5);
+        new Enemy_Type2(GameLib.WIDTH / 2, -10.0, 0.0, 0.0, 0.5);
+		new Powerup_2(GameLib.WIDTH / 4, -9.0, 0.0, 0.0, 0.5);
     }
 
 }

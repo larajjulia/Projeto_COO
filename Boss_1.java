@@ -1,19 +1,13 @@
 import java.awt.Color;
 
-public class Boss_1 extends Enemy_Shooter{
-    private long nextShot = currentTime;
-    private long nextEnemy = currentTime;
-    private static boolean alive = false;
-    private static double life = 100.0;
+public class Boss_1 extends Boss{
+    protected long nextShot = currentTime;
+    
     
     public Boss_1(double X, double Y, double velocity, double angle, double velocityRotation){
         super(X, Y, velocity, angle, velocityRotation);
-        alive = true;
         this.radius = 15;
     }
-
-    public void nextEnemy(long time){nextEnemy = currentTime + time;}
-
 
     public void readyToShoot(Player player){
         updatePosition();
@@ -23,13 +17,6 @@ public class Boss_1 extends Enemy_Shooter{
         }
     }
 
-    public void addEnemy(){ // adiciona de volta os inimigos depois de vencer do boss
-        if(alive) return;
-        new Enemy_Type1(GameLib.WIDTH / 8, -10.0, 0.0, 0.0, 0.5);
-		new Powerup_1(GameLib.WIDTH / 3, -9.0, 0.0, 0.0, 0.5);
-        new Enemy_Type2(GameLib.WIDTH / 2, -10.0, 0.0, 0.0, 0.5);
-		new Powerup_2(GameLib.WIDTH / 4, -9.0, 0.0, 0.0, 0.5);
-    }
     
     public void adjustMovement(){
         if(X < 0.0){
@@ -61,22 +48,9 @@ public class Boss_1 extends Enemy_Shooter{
             GameLib.setColor(Color.RED);
             GameLib.drawCircle(X, Y, radius);
             GameLib.drawDiamond(X, Y, radius);
-            GameLib.setColor(Color.BLACK);
-            GameLib.drawLine(GameLib.WIDTH / 2 - 50.0, 60.0, GameLib.WIDTH/2 + 50.0, 60.0);
-            GameLib.setColor(Color.RED);
-            GameLib.drawLine(GameLib.WIDTH / 2 - life / 2, 60.0, GameLib.WIDTH / 2 + life / 2, 60.0);
+            super.visualEnemies();
         }
     }
 
-    @Override
-    public void explode(long time){
-        if(life != 0){
-            life--;
-        }
-        else{
-            super.explode(time);
-            alive = false;
-        }
-    }
     
 }

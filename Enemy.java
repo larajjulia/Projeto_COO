@@ -59,8 +59,11 @@ public abstract class Enemy extends Game_Explodable implements Interface{
 		}
     }
 
-    public void removeEnemies(){
-
+    public void setupEnemies(){ // inicializa instancias de enemies
+        new Enemy_Type1(GameLib.WIDTH / 8, -10.0, 0.0, 0.0, 0.5);
+		new Powerup_1(GameLib.WIDTH / 3, -9.0, 0.0, 0.0, 0.5);
+        new Enemy_Type2(GameLib.WIDTH / 2, -10.0, 0.0, 0.0, 0.5);
+		new Powerup_2(GameLib.WIDTH / 4, -9.0, 0.0, 0.0, 0.5);
     }
 
 }

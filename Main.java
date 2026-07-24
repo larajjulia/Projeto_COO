@@ -39,10 +39,10 @@ public class Main {
 		Projectile.projectilePlayer(GameLib.WIDTH / 2, GameLib.HEIGHT * 0.90 - player1.getRadius(), 1.25, 1.25); 					
 		/* variáveis dos inimigos tipo 1 */
 		
-		new Enemy_Type1(GameLib.WIDTH / 8, GameLib.HEIGHT - 20, 0.25, 0.0, 0.5);
+		new Enemy_Type1(GameLib.WIDTH / 8, -10.0, 0.25, 0.0, 0.5);
 
 		/* variáveis dos inimigos tipo 2 */
-		new Enemy_Type2(GameLib.WIDTH / 2, GameLib.HEIGHT - 50, 0.25, 0.0, 0.5);
+		new Enemy_Type2(GameLib.WIDTH / 2, -10.0, 0.25, 0.0, 0.5);
 		
 		/* variáveis dos projéteis lançados pelos inimigos (tanto tipo 1, quanto tipo 2) */
 		Projectile.projectileEnemy(0.0, 0.0, 0.0, 0.0); 

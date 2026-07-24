@@ -110,7 +110,7 @@ public class Main {
 			
 			/* colisões projeteis (player) - inimigos */
 			for (Enemy itemEnemy : Enemy.listEnemies){
-				if(itemEnemy instanceof Powerup_1) continue;
+				if(itemEnemy instanceof Powerup) continue;
 				for (Projectile item : Projectile.listProjectiles){
 					if (item instanceof Projectile_Player) 
 						itemEnemy.collisionEnemy(item);
@@ -203,6 +203,7 @@ public class Main {
 			//começo do setup dos bosses
 			if(Game_Object.currentTime - initialTime >= 3000 && boss == false){
 				for (Enemy item : Enemy.listEnemies){
+					if(item instanceof Powerup) continue;
 					item.nextEnemy((long)10000000);
 				}
 				bossAtivo = new Boss_1(GameLib.WIDTH/2, -10.0, 0.40, Math.PI/2, 0.0);
@@ -212,7 +213,8 @@ public class Main {
 			}
 
 			if(boss == true){
-				bossAtivo.adjustMovement();
+				if(bossAtivo.hasExploded()) boss = false;
+				else bossAtivo.adjustMovement();	
 			}
 			/* chamada a display() da classe GameLib atualiza o desenho exibido pela interface do jogo. */
 			

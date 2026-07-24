@@ -28,13 +28,13 @@ public abstract class Enemy extends Game_Explodable implements Interface{
         explode(500);
     }
 
-    protected boolean hasExploded(long currentTime){ // avalia se o inimigo foi explodido
-        if(state == EXPLODING && currentTime > explosionEnd) return true;
+    protected boolean hasExploded(){ // avalia se o inimigo foi explodido
+        if(state == EXPLODING && Game_Object.currentTime > explosionEnd) return true;
         else return false;
     }
 
     protected boolean onScreen(){ // avalia se está inativo ou ativo no momento
-        if(hasExploded(currentTime) || Y < -10 || X > GameLib.HEIGHT + 10) state = INACTIVE; // se o inimigo tiver saído da tela ou explodido, está inativo
+        if(hasExploded() || Y < -10 || X > GameLib.HEIGHT + 10) state = INACTIVE; // se o inimigo tiver saído da tela ou explodido, está inativo
         if(state == INACTIVE) return false;
         else return true;
     }; 

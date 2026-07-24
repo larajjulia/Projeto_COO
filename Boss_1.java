@@ -4,7 +4,7 @@ public class Boss_1 extends Enemy_Shooter{
     private long nextShot = currentTime;
     private long nextEnemy = currentTime;
     private static boolean alive = false;
-    private static int life = 100;
+    private static double life = 100.0;
     
     public Boss_1(double X, double Y, double velocity, double angle, double velocityRotation){
         super(X, Y, velocity, angle, velocityRotation);
@@ -61,16 +61,21 @@ public class Boss_1 extends Enemy_Shooter{
             GameLib.setColor(Color.RED);
             GameLib.drawCircle(X, Y, radius);
             GameLib.drawDiamond(X, Y, radius);
+            GameLib.setColor(Color.BLACK);
+            GameLib.drawLine(GameLib.WIDTH / 2 - 50.0, 60.0, GameLib.WIDTH/2 + 50.0, 60.0);
+            GameLib.setColor(Color.RED);
+            GameLib.drawLine(GameLib.WIDTH / 2 - life / 2, 60.0, GameLib.WIDTH / 2 + life / 2, 60.0);
         }
     }
 
     @Override
     public void explode(long time){
-        if(life != 0) life--;
+        if(life != 0){
+            life--;
+        }
         else{
-            state = EXPLODING;
-            explosionStart = currentTime;
-            explosionEnd = currentTime + time;
+            super.explode(time);
+            alive = false;
         }
     }
     

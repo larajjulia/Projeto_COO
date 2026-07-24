@@ -3,49 +3,61 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+
+
+class Initial_Data{
+
+    private int Player_Life;
+    private int PhasesNumber;
+    private List<String> Phase;
+
+    public Initial_Data(int Player_Life, int PhasesNumber, List<String> Phase){
+        this.Player_Life = Player_Life;
+        this.PhasesNumber = PhasesNumber;
+        this.Phase = Phase;
+    }
+
+    public int getPlayer_Life(){ return Player_Life;}
+    public int getPhasesNumber(){ return PhasesNumber;}
+    public List<String> Phases(){ return Phase;}
+    
+}
 
 public class ReadFiles {
-    Path inputPath = Path.of("Arquivos_Do_Jogo","ArquivoInicial.txt");
-    Path fullPath = inputPath.toAbsolutePath();
-    public static void main(String[] args) {
-        
+
+public static Path inputPath = Path.of("Projeto_COO", "Arquivos_Do_Jogo","ArquivoInicial.txt");
+public static Path fullPath = inputPath.toAbsolutePath();
+   
+    public static Initial_Data Read_Initial_File(){
+
         int PlayerLife = 0;
         int PhasesNumber = 0;
-        String Phase1 = " ";
-        String Phase2 = " ";
-        String Phase3 = " ";
+        List <String> Phases = new ArrayList<>();
         int count = 0;
 
         Charset charset = Charset.forName("US-ASCII");
         try (BufferedReader reader = Files.newBufferedReader(fullPath, charset)) {
-            String line = null;
+            String line = reader.readLine();
+
+            if(line != null) PlayerLife = Integer.parseInt(line);
+
+            line = reader.readLine();
+
+            if(line != null) PhasesNumber = Integer.parseInt(line);
+ 
             while (((line = reader.readLine()) != null) && count < 6) {
-                if (count == 0) PlayerLife = Integer.parseInt(line);
-                else if (count == 1) PhasesNumber = Integer.parseInt(line);
-                else if (count == 2) Phase1 = line;
-                else if (count == 3) Phase2 = line;
-                else Phase3 = line;
+
+                Phases.add(line);
+                
                 count++;
             }
-
-            System.out.println(PlayerLife);
-            System.out.println(PhasesNumber);
-            System.out.println(Phase1);
-            System.out.println(Phase2);
-            System.out.println(Phase3);
 
         } catch (IOException x) {
             System.err.format("IOException: %s%n", x);
         }
+
+           return new Initial_Data(PlayerLife, PhasesNumber, Phases);
     }
-
-    public static int ReadNumber(){
-        int PlayerLife = 0;
-        int PhasesNumber = 0;
-    }
-
-    public static int ReadPath(){
-
-    }
-
 }

@@ -1,4 +1,4 @@
-public class Game_Object<T extends Interface>{
+public class Game_Object{
     public static final int INACTIVE = 0;
 	public static final int ACTIVE = 1;
 	public static final int EXPLODING = 2;
@@ -32,7 +32,7 @@ public class Game_Object<T extends Interface>{
         this.Y = Y;
     }
 
-    public double getDist(T element){
+    public double getDist(Interface element){
         double dx = element.getX() - X;
 		double dy = element.getY() - Y;
 		double dist = Math.sqrt(dx * dx + dy * dy);

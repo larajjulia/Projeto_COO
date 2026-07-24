@@ -1,4 +1,3 @@
-import java.awt.Color;
 import java.util.ArrayList;
 
 /***********************************************************************/
@@ -37,16 +36,16 @@ public class Main {
 
 		/* variáveis dos projéteis disparados pelo player */
 		
-		Projectile projectile_player = Projectile.projectilePlayer(GameLib.WIDTH / 2, GameLib.HEIGHT * 0.90 - player1.getRadius(), 1.25, 1.25); 					
+		Projectile.projectilePlayer(GameLib.WIDTH / 2, GameLib.HEIGHT * 0.90 - player1.getRadius(), 1.25, 1.25); 					
 		/* variáveis dos inimigos tipo 1 */
 		
-		Enemy enemy1 = new Enemy_Type1(GameLib.WIDTH / 8, GameLib.HEIGHT - 20, 0.25, 0.0, 0.5);
+		new Enemy_Type1(GameLib.WIDTH / 8, GameLib.HEIGHT - 20, 0.25, 0.0, 0.5);
 
 		/* variáveis dos inimigos tipo 2 */
-		Enemy enemy2 = new Enemy_Type2(GameLib.WIDTH / 2, GameLib.HEIGHT - 50, 0.25, 0.0, 0.5);
+		new Enemy_Type2(GameLib.WIDTH / 2, GameLib.HEIGHT - 50, 0.25, 0.0, 0.5);
 		
 		/* variáveis dos projéteis lançados pelos inimigos (tanto tipo 1, quanto tipo 2) */
-		Projectile projectile_enemy1 = Projectile.projectileEnemy(0.0, 0.0, 0.0, 0.0); 
+		Projectile.projectileEnemy(0.0, 0.0, 0.0, 0.0); 
 		
 		/* estrelas que formam o fundo de primeiro plano */
 		Background bg1 = Background.Background_1();

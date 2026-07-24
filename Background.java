@@ -6,8 +6,8 @@ public class Background{
     protected double speed;
     protected double width;
     protected double height;
-    private double X;
-    private double Y;
+    // private double X; VSCode está dizendo que esses dois atributos não estão sendo utilizados.
+    // private double Y;
     private Color color;
     private double count;
     public static List<double[]> stars = new ArrayList<>();
@@ -39,6 +39,5 @@ public class Background{
         for(double[] star : stars){
             GameLib.fillRect(star[0], (star[1] + count) % GameLib.HEIGHT, width, height);
         }
-        // GameLib.fillRect(X, (Y + count) % GameLib.HEIGHT, width, height);
     }
 }

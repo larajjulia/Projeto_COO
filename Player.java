@@ -1,6 +1,6 @@
 import java.awt.Color;
 
-public class Player<T extends Interface> extends Game_Explodable {
+public class Player extends Game_Explodable {
     private double velocityX = 0.25; // velocidade no eixo X
     private double velocityY = 0.25; // velocidade no eixo Y
     private long nextShot = currentTime; // próximo momento em que o jogador pode disparar
@@ -38,7 +38,7 @@ public class Player<T extends Interface> extends Game_Explodable {
 
     public void readyToShoot(){ // avalia se o inimigo pode atirar e atira
         if(currentTime > nextShot){
-            Projectile newProjectile = Projectile.projectilePlayer(X, (Y - 2 * radius), 0.0, -1.0);
+            Projectile.projectilePlayer(X, (Y - 2 * radius), 0.0, -1.0);
             nextShot = currentTime + 100;
         }
     }

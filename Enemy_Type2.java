@@ -53,12 +53,12 @@ public class Enemy_Type2 extends Enemy{
             double angle = Math.PI/2 - Math.PI/8 + Math.PI/8 * i; //dois projéteis + e - Math.PI/8(22.5 graus) em relação a Math.PI/2(90 graus), e um exatamente em 90 graus
 
             double a = angle + Math.random() * Math.PI/6 - Math.PI/12; //tbm nao entendi essa conta
-            Projectile newProjectile = Projectile.projectileEnemy(X, Y, Math.cos(a) * 0.3, Math.sin(a) * 0.3);
+            Projectile.projectileEnemy(X, Y, Math.cos(a) * 0.3, Math.sin(a) * 0.3);
         }
     }
     public void addEnemy(){ //spawna novo inimigo se puder
         if(currentTime > nextEnemy2){
-            Enemy enemy = new Enemy_Type2(spawnX, -10.0, 0.42, (3 * Math.PI) / 2, 0.0);
+            new Enemy_Type2(spawnX, -10.0, 0.42, (3 * Math.PI) / 2, 0.0);
         }
     }
     

@@ -4,7 +4,7 @@ public class Boss_1 extends Enemy_Shooter{
     private long nextShot = currentTime;
     private long nextEnemy = currentTime;
     private static boolean alive = false;
-    private static int life = 500;
+    private static int life = 100;
     
     public Boss_1(double X, double Y, double velocity, double angle, double velocityRotation){
         super(X, Y, velocity, angle, velocityRotation);
@@ -44,10 +44,12 @@ public class Boss_1 extends Enemy_Shooter{
         if(Y <= 25.0){
             Y = 25.0;
             angle = 3 * Math.PI / 2; //desce
+            X = GameLib.WIDTH * Math.random() + 1;
         }
         if(Y >= GameLib.HEIGHT - radius){
             Y = GameLib.HEIGHT - radius;
             angle = Math.PI / 2; //sobe
+            X = GameLib.WIDTH * Math.random() + 1;
         }
         
     }

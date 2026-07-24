@@ -205,7 +205,7 @@ public class Main {
 				for (Enemy item : Enemy.listEnemies){
 					item.nextEnemy((long)10000000);
 				}
-				bossAtivo = new Boss_1(GameLib.WIDTH/2, -10.0, 0.20, Math.PI/2, 0.0);
+				bossAtivo = new Boss_1(GameLib.WIDTH/2, -10.0, 0.40, Math.PI/2, 0.0);
 				bossAtivo.visualEnemies();
 				boss = true;
 	

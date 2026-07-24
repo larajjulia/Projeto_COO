@@ -7,7 +7,7 @@ public class Game_Explodable extends Game_Object{
         super(X, Y);
     }
 
-     protected void explode(int time){
+     protected void explode(long time){
         state = EXPLODING;
         explosionStart = currentTime;
         explosionEnd = currentTime + time;

@@ -5,6 +5,7 @@ public class Player extends Game_Explodable {
     private double velocityY = 0.25; // velocidade no eixo Y
     private long nextShot = currentTime; // próximo momento em que o jogador pode disparar
     private final double radius = 12.0; // raio(tamanho) do jogador
+    private long powerupEnd;
     
     public Player(){
         super(GameLib.WIDTH / 2, GameLib.HEIGHT * 0.90);
@@ -16,16 +17,10 @@ public class Player extends Game_Explodable {
     public double getVelocityX(){return velocityX;}
     public double getVelocityY(){return velocityY;}
     public double getRadius(){return radius;}
+    public double getPowerupEnd(){return powerupEnd;}
     public void speedUp(double X, double Y){
         velocityX = X;
         velocityY = Y;
-    }
-
-    public void powerUpEnd(long time){
-        if(currentTime > time){
-            velocityX = 0.25;
-            velocityY = 0.25;
-        }
     }
     
 
@@ -65,10 +60,11 @@ public class Player extends Game_Explodable {
         if (state != ACTIVE) return;
         double dist = (double) getDist(element);
 	    if(dist < (getRadius() + element.getRadius()) * 0.8){
-            if(element instanceof Powerup_1){
-                Powerup_1.powerUp(this);
+            if(element instanceof Powerup){
+                ((Powerup)element).powerUp(this);
+                ((Enemy)element).explode(5000);
             }
-			explode();
+			else explode();
         }
     }
 

@@ -106,6 +106,7 @@ public class Main {
 			
 			/* colisões projeteis (player) - inimigos */
 			for (Enemy itemEnemy : Enemy.listEnemies){
+				if(itemEnemy instanceof Powerup_1) continue;
 				for (Projectile item : Projectile.listProjectiles){
 					if (item instanceof Projectile_Player) 
 						itemEnemy.collisionEnemy(item);
@@ -139,6 +140,10 @@ public class Main {
 			/* Verificando se a explosão do player já acabou.         */
 			/* Ao final da explosão, o player volta a ser controlável */
 			player1.hasExploded();
+			
+			for(Powerup powerup : new ArrayList<>(Powerup.listPowerup)){
+				powerup.powerUpEnd(player1);
+			}
 			
 			/********************************************/
 			/* Verificando entrada do usuário (teclado) */

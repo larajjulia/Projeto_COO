@@ -8,7 +8,7 @@ public class Enemy_Type1 extends Enemy_Shooter{
         super(X, Y, velocity, angle, velocityRotation);
         this.radius = 9.0; // raio(tamanho) do inimigo 1
         nextEnemy1 = currentTime + 500;
-        nextShot = currentTime + 500; //pq q ele muda quando cria uma instancia??
+        nextShot = currentTime + 1000; //pq q ele muda quando cria uma instancia??
     }
 
 

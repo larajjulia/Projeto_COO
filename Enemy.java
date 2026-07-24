@@ -57,4 +57,5 @@ public abstract class Enemy extends Game_Explodable implements Interface{
 			explode();
 		}
     }
+
 }

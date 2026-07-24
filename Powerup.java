@@ -6,6 +6,7 @@ public abstract class Powerup extends Enemy{
     
     public Powerup(double X, double Y, double velocity, double angle, double velocityRotation){
         super(X, Y, velocity, angle, velocityRotation);
+        this.radius = 9.0;
         listPowerup.add(this);
     }
 

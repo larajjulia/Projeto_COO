@@ -8,12 +8,11 @@ public class Powerup_1 extends Powerup{
     public Powerup_1(double X, double Y, double velocity, double angle, double velocityRotation){
         super(X, Y, velocity, angle, velocityRotation);
         nextPowerup1 = currentTime + 5000;
-        this.radius = 9.0;
         
     }
 
     
-    public void powerUp(Player player){ // acelera o jogador por 10 segundos
+    public void powerUp(Player player){ // acelera o jogador por 5 segundos
         player.speedUp(0.5, 0.5);
         powerupEnd = Game_Object.currentTime + 5000;
     }

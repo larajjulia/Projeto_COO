@@ -39,10 +39,11 @@ public class Main {
 		Projectile.projectilePlayer(GameLib.WIDTH / 2, GameLib.HEIGHT * 0.90 - player1.getRadius(), 1.25, 1.25); 					
 		/* variáveis dos inimigos tipo 1 */
 		
-		new Enemy_Type1(GameLib.WIDTH / 8, -10.0, 0.25, 0.0, 0.5);
+		new Enemy_Type1(GameLib.WIDTH / 8, -10.0, 0.0, 0.0, 0.5);
+		new Powerup_1(GameLib.WIDTH / 3, -9.0, 0.0, 0.0, 0.5);
 
 		/* variáveis dos inimigos tipo 2 */
-		new Enemy_Type2(GameLib.WIDTH / 2, -10.0, 0.25, 0.0, 0.5);
+		new Enemy_Type2(GameLib.WIDTH / 2, -10.0, 0.0, 0.0, 0.5);
 		
 		/* variáveis dos projéteis lançados pelos inimigos (tanto tipo 1, quanto tipo 2) */
 		Projectile.projectileEnemy(0.0, 0.0, 0.0, 0.0); 
@@ -96,8 +97,10 @@ public class Main {
 			
 				/* colisões player - inimigos */
 							
-				for (Enemy item : Enemy.listEnemies)
-				 player1.collisionPlayer(item);
+				for (Enemy item : Enemy.listEnemies){
+					player1.collisionPlayer(item);
+				}
+				 
 				
 			}
 			
@@ -114,6 +117,7 @@ public class Main {
 			/***************************/
 			
 			/* projeteis (player e inimigos) */
+			
 
 			for (Projectile item : new ArrayList<>(Projectile.listProjectiles))
 				item.updateState();
@@ -123,14 +127,14 @@ public class Main {
 			
 			/* inimigos tipo 1 */
 
-			for (Enemy item : new ArrayList<>(Enemy.listEnemies))
+			for (Enemy_Shooter item : new ArrayList<>(Enemy_Shooter.listEnemyShooters))
 				item.readyToShoot(player1);
 
 			/* verificando se novos inimigos devem ser "lançados" */
 			
-			for (Enemy element : new ArrayList<>(Enemy.listEnemies))
+			for (Enemy element : new ArrayList<>(Enemy.listEnemies)){
 				element.addEnemy();
-		
+			}
 			
 			/* Verificando se a explosão do player já acabou.         */
 			/* Ao final da explosão, o player volta a ser controlável */
@@ -182,7 +186,7 @@ public class Main {
 			/* desenhando inimigos (tipo 1) */
 			/* desenhando inimigos (tipo 2) */
 			
-			for (Enemy item : Enemy.listEnemies)
+			for (Enemy item : new ArrayList<>(Enemy.listEnemies))
 				item.visualEnemies();
 			
 			

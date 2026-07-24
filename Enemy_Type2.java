@@ -1,5 +1,5 @@
 import java.awt.Color;
-public class Enemy_Type2 extends Enemy{
+public class Enemy_Type2 extends Enemy_Shooter{
     private double spawnX; // coordenada X em que o próximo inimigo 2 irá spawnar
     private static long nextEnemy2 = currentTime + 7000; // próximo momento em que um inimigo 2 pode aparecer(nn sei onde muda)
     private static int enemyCount; // contagem de inimigos 2
@@ -15,13 +15,6 @@ public class Enemy_Type2 extends Enemy{
 			spawnX = Math.random() > 0.5 ? GameLib.WIDTH * 0.2 : GameLib.WIDTH * 0.8;
 			nextEnemy2 = (long) (currentTime + 3000 + Math.random() * 3000);
         }
-    }
-
-    @Override
-    public boolean onScreen(){
-        if(hasExploded(currentTime) || X < -10 || X > GameLib.WIDTH + 10) state = INACTIVE; // se o inimigo tiver saído da tela ou explodido, está inativo
-        if(state == INACTIVE) return false;
-        else return true;
     }
 
     @Override

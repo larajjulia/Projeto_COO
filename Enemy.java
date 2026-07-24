@@ -32,7 +32,11 @@ public abstract class Enemy extends Game_Explodable implements Interface{
         else return false;
     }
 
-    protected abstract boolean onScreen(); // avalia se está inativo ou ativo no momento
+    protected boolean onScreen(){ // avalia se está inativo ou ativo no momento
+        if(hasExploded(currentTime) || Y < -10 || X > GameLib.HEIGHT + 10) state = INACTIVE; // se o inimigo tiver saído da tela ou explodido, está inativo
+        if(state == INACTIVE) return false;
+        else return true;
+    }; 
 
     public void updatePosition(){ // atualiza posições X e Y e ângulo calculando o deslocamento
         if(onScreen() && state != INACTIVE){
@@ -43,8 +47,7 @@ public abstract class Enemy extends Game_Explodable implements Interface{
         else listEnemies.remove(this);
     }
 
-    protected abstract void addEnemy();
-    protected abstract void readyToShoot(Player player); 
+    protected abstract void addEnemy(); 
     protected abstract void visualEnemies(); // faz a parte visual dos inimigos
 
     public void collisionEnemy(Interface element){

@@ -16,6 +16,17 @@ public class Player extends Game_Explodable {
     public double getVelocityX(){return velocityX;}
     public double getVelocityY(){return velocityY;}
     public double getRadius(){return radius;}
+    public void speedUp(double X, double Y){
+        velocityX = X;
+        velocityY = Y;
+    }
+
+    public void powerUpEnd(long time){
+        if(currentTime > time){
+            velocityX = 0.25;
+            velocityY = 0.25;
+        }
+    }
     
 
     public void updateX(){ // conserta a coordenada X se o jogador estiver fora da cena do jogo (após input)
@@ -54,6 +65,9 @@ public class Player extends Game_Explodable {
         if (state != ACTIVE) return;
         double dist = (double) getDist(element);
 	    if(dist < (getRadius() + element.getRadius()) * 0.8){
+            if(element instanceof Powerup_1){
+                Powerup_1.powerUp(this);
+            }
 			explode();
         }
     }

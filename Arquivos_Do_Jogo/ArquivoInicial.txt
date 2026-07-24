@@ -1,0 +1,5 @@
+100
+3
+Configuracao_Fase1.txt
+Configuracao_Fase2.txt
+Configuracao_Fase3.txt

@@ -9,6 +9,8 @@ public class Powerup_2 extends Powerup{
         nextPowerup2 = currentTime + 9000;
     }
 
+    public void nextEnemy(long time){nextPowerup2 = currentTime + time;}
+
     public void powerUp(Player player){ // deixa o jogador invencivel por 10 segundos
         player.invincible = true;
         powerupEnd = Game_Object.currentTime + 10000;

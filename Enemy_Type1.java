@@ -12,12 +12,14 @@ public class Enemy_Type1 extends Enemy_Shooter{
     }
 
 
+    public void nextEnemy(long time){nextEnemy1 = currentTime + time;}
+
     @Override
     public void readyToShoot(Player player){ // avalia se o inimigo pode atirar e atira
         updatePosition();
         if(!onScreen()) return;
         if(currentTime > nextShot && Y < player.getY()){ // se o inimigo puder lançar um projétil e
-            Projectile.projectileEnemy(X, Y, Math.cos(angle) * (0.45), Math.sin(angle) * (0.45) * (-1.0)); // cria um novo projétil
+            new Projectile_Enemy(X, Y, Math.cos(angle) * (0.45), Math.sin(angle) * (0.45) * (-1.0)); // cria um novo projétil
             nextShot = (long) (currentTime + 200 + Math.random() * 500); // atualiza o tempo de espera até o próxmo projétil
         }
     }

@@ -17,6 +17,8 @@ public class Enemy_Type2 extends Enemy_Shooter{
         }
     }
 
+    public void nextEnemy(long time){nextEnemy2 = currentTime + time;}
+
     @Override
     public void readyToShoot(Player player){ // avalia se é hora de lançar um projétil
         double previousY = Y;

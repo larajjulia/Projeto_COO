@@ -11,6 +11,8 @@ public class Powerup_1 extends Powerup{
         
     }
 
+    public void nextEnemy(long time){nextPowerup1 = currentTime + time;}
+
     
     public void powerUp(Player player){ // acelera o jogador por 5 segundos
         player.speedUp(0.5, 0.5);

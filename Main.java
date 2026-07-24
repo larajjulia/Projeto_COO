@@ -14,6 +14,8 @@ public class Main {
     public static final int ACTIVE = Game_Object.ACTIVE;
     public static final int INACTIVE = Game_Object.INACTIVE;
     public static final int EXPLODING = Game_Object.EXPLODING;
+	public static final long initialTime = System.currentTimeMillis(); //tempo de inicio do jogo
+	public static Boss_1 bossAtivo = null;
 	/* Espera, sem fazer nada, até que o instante de tempo atual seja */
 	/* maior ou igual ao instante especificado no parâmetro "time.    */
 	
@@ -29,6 +31,7 @@ public class Main {
 		/* Indica que o jogo está em execução */
 
 		boolean running = true;
+		boolean boss = false;
 
 		/* variáveis do player */
 		
@@ -196,6 +199,21 @@ public class Main {
 				item.visualEnemies();
 			
 			
+
+			//começo do setup dos bosses
+			if(Game_Object.currentTime - initialTime >= 3000 && boss == false){
+				for (Enemy item : Enemy.listEnemies){
+					item.nextEnemy((long)10000000);
+				}
+				bossAtivo = new Boss_1(GameLib.WIDTH/2, -10.0, 0.20, Math.PI/2, 0.0);
+				bossAtivo.visualEnemies();
+				boss = true;
+	
+			}
+
+			if(boss == true){
+				bossAtivo.adjustMovement();
+			}
 			/* chamada a display() da classe GameLib atualiza o desenho exibido pela interface do jogo. */
 			
 			GameLib.display();

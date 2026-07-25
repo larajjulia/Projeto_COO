@@ -58,7 +58,14 @@ public class Main {
 	}
 
 	private static Boss spawnBoss(Boss_Config config) {
-		return Boss.bossApplication(config.Type());
+		Boss_Info bossInfo = new Boss_Info();
+    	bossInfo.type = config.Type();
+    	bossInfo.X = config.positionX();
+    	bossInfo.Y = config.positionY();
+    	bossInfo.when = config.Time();
+    	bossInfo.life = 120.0; // Boss.java ainda ignora o parâmetro "life" do construtor e fixa 120.0 internamente, veja observação abaixo
+
+    	return Boss.bossApplication(bossInfo);
 	}
 
 	/* Método principal */

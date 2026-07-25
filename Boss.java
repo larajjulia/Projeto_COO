@@ -2,8 +2,8 @@ import java.awt.Color;
 
 public abstract class Boss extends Enemy_Shooter{
     protected long nextEnemy = currentTime;
-    protected static boolean alive = false;
-    protected static double life;
+    protected boolean alive = false;
+    protected double life;
 
     public Boss(double X, double Y, double velocity, double angle, double velocityRotation){
         super(X, Y, velocity, angle, velocityRotation);
@@ -11,13 +11,13 @@ public abstract class Boss extends Enemy_Shooter{
         life = 100.0;
     }
 
+    public int getState(){return state;}
+    public long getExplosionEnd(){return explosionEnd;}
+
     public void nextEnemy(long time){nextEnemy = currentTime + time;}
 
 
-    public void addEnemy(){ // adiciona de volta os inimigos depois de vencer do boss
-        if(alive) return;
-        setupEnemies();
-    }
+    public void addEnemy(){} // controlado pela main
 
     protected void visualEnemies(){ // faz a barra de vida
         GameLib.setColor(Color.BLACK);
@@ -49,10 +49,10 @@ public abstract class Boss extends Enemy_Shooter{
 
 		switch(bossN){
 		case 1: 
-            bossAtivo = new Boss_1(GameLib.WIDTH/2, -10.0, 0.40, Math.PI/2, 0.0);
-            break;
-		case 2: 
             bossAtivo = new Boss_2(0.0, GameLib.HEIGHT/3, 0.2, 0.0, 0.0);
+            break;
+        case 2: 
+            bossAtivo = new Boss_1(GameLib.WIDTH/2, -10.0, 0.40, 3*Math.PI/2, 0.0);
             break;
 		}
 		bossAtivo.visualEnemies();

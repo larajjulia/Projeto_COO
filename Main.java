@@ -17,8 +17,10 @@ public class Main {
     public static final int ACTIVE = Game_Object.ACTIVE;
     public static final int INACTIVE = Game_Object.INACTIVE;
     public static final int EXPLODING = Game_Object.EXPLODING;
-	public static final long initialTime = System.currentTimeMillis(); //tempo de inicio do jogo
+	public static long initialTime; //variavel de controle de tempo
 	public static Boss bossAtivo = null; // indica a presença ou não de boss
+	public static int typeBoss = 1; // determina o tipo do boss a ser instanciado
+	public static long enemyDelay; // delay entre fases do jogo
 	/* Espera, sem fazer nada, até que o instante de tempo atual seja */
 	/* maior ou igual ao instante especificado no parâmetro "time.    */
 	
@@ -61,6 +63,7 @@ public class Main {
 		/* iniciado interface gráfica */
 		
 		GameLib.initGraphics();
+		initialTime = System.currentTimeMillis();
 		//GameLib.initGraphics_SAFE_MODE();  // chame esta versão do método caso nada seja desenhado na janela do jogo.
 		
 		/*************************************************************************************************/
@@ -83,7 +86,7 @@ public class Main {
 		/*                                                                                               */
 		/*************************************************************************************************/
 		
-		while(running){
+		while(running && typeBoss <= 2){ // quando passar do segundo boss, o jogo termina
 
 			// public static long currentTime = System.currentTimeMillis();
     		// public static long delta = System.currentTimeMillis() - currentTime;
@@ -201,16 +204,30 @@ public class Main {
 				item.visualEnemies();
 			
 			
-
 			//começo do setup dos bosses
-			if(Game_Object.currentTime - initialTime >= 3000 && bossAtivo == null){
-				bossAtivo = Boss.bossApplication(2);
-			}
 
+			//verificação de atualização de estados
 			if(bossAtivo != null){
-				if(bossAtivo.hasExploded()) bossAtivo = null;
+				if(bossAtivo.getState() == INACTIVE){
+					bossAtivo = null;
+					initialTime = System.currentTimeMillis();
+					typeBoss++;
+					enemyDelay = Game_Object.currentTime + 3000;
+				}
 				else bossAtivo.adjustMovement();
 			}
+
+			//spawn dos bosses
+			if(Game_Object.currentTime - initialTime >= 15000 && bossAtivo == null){ // se tiverem passado 15 segundos de inimigos regulares
+				bossAtivo = Boss.bossApplication(typeBoss);
+			}
+			
+			//setup após fases
+			if(enemyDelay != 0 && Game_Object.currentTime >= enemyDelay){
+    			Boss.setupEnemies();
+    			enemyDelay = 0; 
+			}
+	
 
 			
 			/* chamada a display() da classe GameLib atualiza o desenho exibido pela interface do jogo. */

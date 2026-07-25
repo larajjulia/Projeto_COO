@@ -38,7 +38,7 @@ public class Boss_2 extends Boss{
             for(int i = 0; i < 3; i++){
             double angle = Math.PI/2 - Math.PI/8 + Math.PI/8 * i;
             Projectile_Enemy projectile = new Projectile_Enemy(X, Y, Math.cos(angle) * 0.4, Math.sin(angle) * 0.4);
-            projectile.changeSize(7.0);
+            projectile.changeSize(10.0);
             }
 
 

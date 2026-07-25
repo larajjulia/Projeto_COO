@@ -7,7 +7,6 @@ public abstract class Enemy extends Game_Explodable implements Interface{
     protected double angle; // ângulo de movimentação
     protected double velocityRotation; // velocidade da rotação
     protected double radius; // raio do inimigo
-    
 
     public static List<Enemy> listEnemies = new ArrayList<Enemy>(); 
 
@@ -28,7 +27,7 @@ public abstract class Enemy extends Game_Explodable implements Interface{
         explode(500);
     }
 
-    protected boolean hasExploded(){ // avalia se o inimigo foi explodido
+    public boolean hasExploded(){ // avalia se o inimigo foi explodido
         if(state == EXPLODING && Game_Object.currentTime > explosionEnd) return true;
         else return false;
     }
@@ -59,7 +58,8 @@ public abstract class Enemy extends Game_Explodable implements Interface{
 		}
     }
 
-    public void setupEnemies(){ // inicializa instancias de enemies
+    public static void setupEnemies(){ // inicializa instancias de enemies
+
         new Enemy_Type1(GameLib.WIDTH / 8, -10.0, 0.0, 0.0, 0.5);
 		new Powerup_1(GameLib.WIDTH / 3, -9.0, 0.0, 0.0, 0.5);
         new Enemy_Type2(GameLib.WIDTH / 2, -10.0, 0.0, 0.0, 0.5);

@@ -30,6 +30,7 @@ public class Game_Object{
         this.state = ACTIVE;
         this.X = X;
         this.Y = Y;
+        
     }
 
     public double getDist(Interface element){

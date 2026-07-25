@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -44,8 +45,8 @@ public class Main {
 	}
 
 	private static void spawnPowerup(PowerUp_Config config) {
-		double velocity = 0.20 + Math.random() * 0.15; 
-    	double angle = (3 * Math.PI) / 2;
+		double velocity = 0.20 + Math.random() * 0.15;
+		double angle = (3 * Math.PI) / 2;
 
 		switch (config.Type()) {
 			case 1:
@@ -59,13 +60,14 @@ public class Main {
 
 	private static Boss spawnBoss(Boss_Config config) {
 		Boss_Info bossInfo = new Boss_Info();
-    	bossInfo.type = config.Type();
-    	bossInfo.X = config.positionX();
-    	bossInfo.Y = config.positionY();
-    	bossInfo.when = config.Time();
-    	bossInfo.life = config.Life(); // Boss.java ainda ignora o parâmetro "life" do construtor e fixa 120.0 internamente, veja observação abaixo
+		bossInfo.type = config.Type();
+		bossInfo.X = config.positionX();
+		bossInfo.Y = config.positionY();
+		bossInfo.when = config.Time();
+		bossInfo.life = config.Life(); // Boss.java ainda ignora o parâmetro "life" do construtor e fixa 120.0
+										// internamente, veja observação abaixo
 
-    	return Boss.bossApplication(bossInfo);
+		return Boss.bossApplication(bossInfo);
 	}
 
 	/* Método principal */
@@ -239,6 +241,11 @@ public class Main {
 				/* Ao final da explosão, o player volta a ser controlável */
 				player1.hasExploded();
 
+				if (player1.getState() == INACTIVE && player1.isGameOver()) {
+					phaseRunning = false;
+					running = false;
+				}
+
 				for (Powerup powerup : new ArrayList<>(Powerup.listPowerup)) {
 					powerup.powerUpEnd(player1);
 				}
@@ -311,6 +318,12 @@ public class Main {
 			phaseIndex++;
 
 		}
+
+		if (player1.isGameOver()) {
+			System.out.println("GAME OVER");
+			busyWait(System.currentTimeMillis() + 3);
+		}
+
 		System.exit(0);
 	}
 

@@ -12,8 +12,4 @@ public abstract class Powerup extends Enemy{
 
     public abstract void powerUp(Player player);
     public abstract void powerUpEnd(Player player);
-
-    
-
-
 }

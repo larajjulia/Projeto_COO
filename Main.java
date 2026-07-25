@@ -1,4 +1,3 @@
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -12,8 +11,6 @@ import java.util.List;
 /*    - ESC: para sair do jogo.                                        */
 /*                                                                     */
 /***********************************************************************/
-
-// Função para controlar o comportamento do boss
 
 public class Main {
 	public static final int ACTIVE = Game_Object.ACTIVE;
@@ -151,7 +148,7 @@ public class Main {
 
 			System.out.println("PHASE " + (phaseIndex + 1)); // printando a fase
 
-			while (running && phaseRunning) { // quando passar do segundo boss, o jogo termina
+			while (running && phaseRunning) {
 
 				// public static long currentTime = System.currentTimeMillis();
 				// public static long delta = System.currentTimeMillis() - currentTime;

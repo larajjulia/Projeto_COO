@@ -57,7 +57,6 @@ public class ReadFiles {
             System.err.format("IOException File: %s%n", x);
         }
 
-
         return new Initial_Data(PlayerLife, PhasesNumber, Phases);
     }
 }

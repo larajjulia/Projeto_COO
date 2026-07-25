@@ -140,14 +140,6 @@ public class Read_Config_Phase{
                 System.err.format("IOException: %s%n", x);
             }
 
-            for (Enemy_Config item : enemiesList)
-                System.out.println(item);
-        
-            // for (PowerUp_Config element : powerupsList);
-            //     System.out.println(element);
-
-            System.out.println(boss);
-
             return new Phase_Config(enemiesList, powerupsList, boss);  
         }
 }

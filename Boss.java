@@ -8,7 +8,7 @@ public abstract class Boss extends Enemy_Shooter{
     public Boss(double X, double Y, double velocity, double angle, double velocityRotation){
         super(X, Y, velocity, angle, velocityRotation);
         alive = true;
-        life = 200.0;
+        life = 120.0;
     }
 
     public int getState(){return state;}

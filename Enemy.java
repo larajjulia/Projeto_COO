@@ -33,7 +33,7 @@ public abstract class Enemy extends Game_Explodable implements Interface{
     }
 
     protected boolean onScreen(){ // avalia se está inativo ou ativo no momento
-        if(hasExploded() || Y < -10 || X > GameLib.HEIGHT + 10) state = INACTIVE; // se o inimigo tiver saído da tela ou explodido, está inativo
+        if(hasExploded() || Y < -10 || Y > GameLib.HEIGHT + 10) state = INACTIVE; // se o inimigo tiver saído da tela ou explodido, está inativo
         if(state == INACTIVE) return false;
         else return true;
     }; 

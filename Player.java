@@ -8,11 +8,13 @@ public class Player extends Game_Explodable {
     public boolean invincible = false; // variavel de controle do powerup 2
     protected boolean alive = false;
     protected double life;
+    protected double maxLife;
     
     public Player(int Life){
         super(GameLib.WIDTH / 2, GameLib.HEIGHT * 0.90);
         alive = true;
         this.life = Life;
+        this.maxLife = Life;
     }
 
     public double getState(){return state;}
@@ -59,7 +61,10 @@ public class Player extends Game_Explodable {
     }
 
     public void hasExploded(){ // depois de passar do fim da explosão, o jogador volta a ficar ativo
-        if(state == EXPLODING && currentTime > explosionEnd) state = ACTIVE;
+        if(state == EXPLODING && currentTime > explosionEnd){
+            state = ACTIVE;
+            life = maxLife;
+        } 
     }
 
     public void readyToShoot(){ // avalia se o inimigo pode atirar e atira

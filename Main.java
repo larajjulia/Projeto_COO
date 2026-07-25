@@ -42,7 +42,7 @@ public class Main {
 		Initial_Data readFirstFile = ReadFiles.Read_Initial_File();
 		Player player1 = new Player(readFirstFile.getPlayer_Life());
 		int phaseNow = 0;
-		Phase_Info phaseInfo = Phase_Info.Read_Enemy_Info(readFirstFile.Phases().get(phaseNow));						
+		Phase_Info phaseInfo = Phase_Info.Read_Enemy_Info(readFirstFile.Phases().get(phaseNow));	
 
 		/* variáveis dos projéteis disparados pelo player */
 		Projectile.projectilePlayer(GameLib.WIDTH / 2, GameLib.HEIGHT * 0.90 - player1.getRadius(), 1.25, 1.25); 	
@@ -194,17 +194,16 @@ public class Main {
 			
 			
 			//começo do setup dos inimigos
-
+			
 			for(Enemy_Info info : phaseInfo.enemies){
                 if(!info.spawned && Game_Object.currentTime - initialTime >= info.when){
 					if(info.powerup == false){
-						if(info.type == 1) new Enemy_Type1(info.X, info.Y, 0.0, 0.0, 0.5);
-						else new Enemy_Type2(info.X, info.Y, 0.0, 0.0, 0.5);
-	
+						if(info.type == 1) new Enemy_Type1(info.X, info.Y, 0.4, 3 * Math.PI / 2, 0.0);
+						else new Enemy_Type2(info.X, info.Y, 0.4, 3 * Math.PI / 2, 0.0);
 					}
 					else{
-						if(info.type == 1) new Powerup_1(info.X, info.Y, 0.3, 0.0, 0.5);
-						else new Powerup_2(info.X, info.Y, 0.15, 0.0, 0.5);
+						if(info.type == 1) new Powerup_1(info.X, info.Y, 0.3, 3 * Math.PI / 2, 0.0);
+						else new Powerup_2(info.X, info.Y, 0.15, 3 * Math.PI / 2, 0.0);
 					}
 					info.spawned = true;
 				}

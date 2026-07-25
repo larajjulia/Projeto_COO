@@ -1,17 +1,13 @@
 import java.awt.Color;
 
 public class Powerup_1 extends Powerup{
-     private static long nextPowerup1 = currentTime;
      private static long powerupEnd;
 
 
     public Powerup_1(double X, double Y, double velocity, double angle, double velocityRotation){
         super(X, Y, velocity, angle, velocityRotation);
-        nextPowerup1 = currentTime + 5000;
         
     }
-
-    public void nextEnemy(long time){nextPowerup1 = currentTime + time;}
 
     
     public void powerUp(Player player){ // acelera o jogador por 5 segundos
@@ -19,12 +15,6 @@ public class Powerup_1 extends Powerup{
         powerupEnd = Game_Object.currentTime + 5000;
     }
 
-
-    public void addEnemy(){ // spawna novo powerup se puder
-        if(Game_Object.currentTime > nextPowerup1){
-            new Powerup_1(Math.random() * (GameLib.WIDTH - 20.0) + 10.0, -10.0, (0.20 + Math.random() * 0.15), (3 * Math.PI) / 2, 0.0);
-        }
-    }
 
     public void visualEnemies(){
         updatePosition();

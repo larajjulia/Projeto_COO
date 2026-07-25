@@ -6,8 +6,6 @@ public class Background{
     protected double speed;
     protected double width;
     protected double height;
-    // private double X; VSCode está dizendo que esses dois atributos não estão sendo utilizados.
-    // private double Y;
     private Color color;
     private double count;
     public static List<double[]> stars = new ArrayList<>();

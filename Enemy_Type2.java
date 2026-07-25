@@ -1,23 +1,18 @@
 import java.awt.Color;
 public class Enemy_Type2 extends Enemy_Shooter{
     private double spawnX; // coordenada X em que o próximo inimigo 2 irá spawnar
-    private static long nextEnemy2 = currentTime + 7000; // próximo momento em que um inimigo 2 pode aparecer(nn sei onde muda)
     private static int enemyCount; // contagem de inimigos 2
      
     public Enemy_Type2(double X, double Y, double velocity, double angle, double velocityRotation){
         super(X, Y, velocity, angle, velocityRotation);
         enemyCount++;
         this.radius = 12; // raio(tamanho) do inimigo 2
-        if(enemyCount < 10) nextEnemy2 = currentTime + 120;
-        else{
-            //isso aqui eu tbm nn consertei, mto confuso
+        if(enemyCount >= 10){
             enemyCount = 0;
 			spawnX = Math.random() > 0.5 ? GameLib.WIDTH * 0.2 : GameLib.WIDTH * 0.8;
-			nextEnemy2 = (long) (currentTime + 3000 + Math.random() * 3000);
         }
     }
 
-    public void nextEnemy(long time){nextEnemy2 = currentTime + time;}
 
     @Override
     public void readyToShoot(Player player){ // avalia se é hora de lançar um projétil
@@ -25,7 +20,6 @@ public class Enemy_Type2 extends Enemy_Shooter{
         updatePosition();
         if(!onScreen()) return;
         double threshold = GameLib.HEIGHT * 0.3;
-         // eu nao corrigi essa parte pq nao entendi DDD; dar uma melhorada
         if(previousY < threshold && Y >= threshold){
             if(X < GameLib.WIDTH / 2) velocityRotation = 0.003;
             else velocityRotation = -0.003;
@@ -48,15 +42,10 @@ public class Enemy_Type2 extends Enemy_Shooter{
             double angle = Math.PI/2 - Math.PI/8 + Math.PI/8 * i; //dois projéteis + e - Math.PI/8(22.5 graus) em relação a Math.PI/2(90 graus), e um exatamente em 90 graus
 
             double a = angle + Math.random() * Math.PI/6 - Math.PI/12; //tbm nao entendi essa conta
-            Projectile.projectileEnemy(X, Y, Math.cos(a) * 0.3, Math.sin(a) * 0.3);
+            new Projectile_Enemy(X, Y, Math.cos(a) * 0.3, Math.sin(a) * 0.3);
         }
     }
-    public void addEnemy(){ //spawna novo inimigo se puder
-        if(currentTime > nextEnemy2){
-            new Enemy_Type2(spawnX, -10.0, 0.42, (3 * Math.PI) / 2, 0.0);
-        }
-    }
-    
+
     @Override
     public void visualEnemies(){
         if(!visualExplosion()){

@@ -64,8 +64,7 @@ public class Main {
 		bossInfo.X = config.positionX();
 		bossInfo.Y = config.positionY();
 		bossInfo.when = config.Time();
-		bossInfo.life = config.Life(); // Boss.java ainda ignora o parâmetro "life" do construtor e fixa 120.0
-										// internamente, veja observação abaixo
+		bossInfo.life = config.Life(); 
 
 		return Boss.bossApplication(bossInfo);
 	}
@@ -85,20 +84,12 @@ public class Main {
 
 		/* Inicializa projéteis disparados pelo player */
 
-		Projectile.projectilePlayer(GameLib.WIDTH / 2, GameLib.HEIGHT * 0.90 - player1.getRadius(), 1.25, 1.25);
-
-		/* variáveis dos inimigos/powerup tipo 1 */
-		// new Enemy_Type1(GameLib.WIDTH / 8, -10.0, 0.0, 0.0, 0.5);
-		// new Powerup_1(GameLib.WIDTH / 3, -9.0, 0.0, 0.0, 0.5);
-
-		// /* variáveis dos inimigos/powerup tipo 2 */
-		// new Enemy_Type2(GameLib.WIDTH / 2, -10.0, 0.0, 0.0, 0.5);
-		// new Powerup_2(GameLib.WIDTH / 4, -9.0, 0.0, 0.0, 0.5);
+		new Projectile_Player(GameLib.WIDTH / 2, GameLib.HEIGHT * 0.90 - player1.getRadius(), 1.25, 1.25);
 
 		/*
 		 * variáveis dos projéteis lançados pelos inimigos (tanto tipo 1, quanto tipo 2)
 		 */
-		Projectile.projectileEnemy(0.0, 0.0, 0.0, 0.0);
+		new Projectile_Enemy(0.0, 0.0, 0.0, 0.0);
 
 		/* estrelas que formam o fundo de primeiro plano */
 		Background bg1 = Background.Background_1();
@@ -236,11 +227,7 @@ public class Main {
 				for (Enemy_Shooter item : new ArrayList<>(Enemy_Shooter.listEnemyShooters))
 					item.readyToShoot(player1);
 
-				// /* verificando se novos inimigos devem ser "lançados" */
 
-				// for (Enemy element : new ArrayList<>(Enemy.listEnemies)) {
-				// element.addEnemy();
-				// }
 
 				/* Verificando se a explosão do player já acabou. */
 				/* Ao final da explosão, o player volta a ser controlável */

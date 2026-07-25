@@ -9,8 +9,8 @@ import java.util.List;
 class Configuration {
 
     private String object;
-    private int type, time;
-    private double positionX, positionY;
+    public int type, time;
+    public double positionX, positionY;
 
     public Configuration(String object, int type, int time, double positionX, double positionY) {
 
@@ -127,7 +127,7 @@ class PowerUp_Config extends Configuration {
 }
 
 class Boss_Config extends Configuration {
-    private double life;
+    public double life;
 
     public Boss_Config(String boss, int type, int time, double positionX, double positionY, double life) {
         super(boss, type, time, positionX, positionY);

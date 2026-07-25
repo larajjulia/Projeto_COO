@@ -80,7 +80,7 @@ public class Player extends Game_Explodable {
 
     public void readyToShoot(){ // avalia se o inimigo pode atirar e atira
         if(currentTime > nextShot){
-            Projectile.projectilePlayer(X, (Y - 2 * radius), 0.0, -1.0);
+            new Projectile_Player(X, (Y - 2 * radius), 0.0, -1.0);
             nextShot = currentTime + 100;
         }
     }

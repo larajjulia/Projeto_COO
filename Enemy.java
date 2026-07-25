@@ -21,7 +21,6 @@ public abstract class Enemy extends Game_Explodable implements Interface{
     public double getX(){return X;}
     public double getY(){return Y;}
     public double getRadius(){return radius;}
-    public abstract void nextEnemy(long time);
 
     public void explode(){ // executar quando ocorrem colisões do inimigo com projéteis do jogador
         explode(500);
@@ -47,7 +46,6 @@ public abstract class Enemy extends Game_Explodable implements Interface{
         else listEnemies.remove(this);
     }
 
-    protected abstract void addEnemy(); 
     protected abstract void visualEnemies(); // faz a parte visual dos inimigos
 
     public void collisionEnemy(Interface element){

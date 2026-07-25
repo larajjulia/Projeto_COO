@@ -12,12 +12,7 @@ public abstract class Boss extends Enemy_Shooter{
     }
 
     public int getState(){return state;}
-    public long getExplosionEnd(){return explosionEnd;}
 
-    public void nextEnemy(long time){nextEnemy = currentTime + time;}
-
-
-    public void addEnemy(){} // controlado pela main
 
     protected void visualEnemies(){ // faz a barra de vida
         GameLib.setColor(Color.BLACK);
@@ -40,10 +35,6 @@ public abstract class Boss extends Enemy_Shooter{
     protected abstract void adjustMovement();
 
     public static Boss bossApplication(Boss_Info bossInfo){ // bossN determina se é boss 1 ou 2
-		for (Enemy item : Enemy.listEnemies){
-			if(item instanceof Powerup) continue;
-			item.nextEnemy((long)10000000);
-		}
 
         Boss bossAtivo = null;
 

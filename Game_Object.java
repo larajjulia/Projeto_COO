@@ -22,8 +22,6 @@ public class Game_Object{
     	Game_Object.currentTime = now;
     }
 
-    // public long getCurrentTime(){return currentTime;}
-    // public long getDelta(){return delta;}
 
     
     protected Game_Object(double X, double Y){

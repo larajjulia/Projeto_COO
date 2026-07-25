@@ -77,6 +77,7 @@ public class Main {
 		/* Indica que o jogo está em execução */
 		int phaseIndex = 0;
 		boolean running = true;
+		boolean escapedManually = false;
 		Initial_Data readFirstFile = ReadFiles.Read_Initial_File();
 
 		/* Inicializa o player */
@@ -144,8 +145,8 @@ public class Main {
 		/*                                                                                               */
 		/*************************************************************************************************/
 		while (running && phaseIndex < readFirstFile.getPhasesNumber()) {
-			System.out.println("START GAME");
-			
+			System.out.println("START GAME"); //printando inicio do jogo 
+
 			String phaseFile = readFirstFile.Phases().get(phaseIndex);
 			Phase_Config phase = Read_Config_Phase.Phase_Reader(phaseFile);
 
@@ -157,7 +158,8 @@ public class Main {
 			boolean phaseRunning = true;
 			long phaseStart = System.currentTimeMillis();
 
-			System.out.println("PHASE " + (phaseIndex + 1));
+			System.out.println("PHASE " + (phaseIndex + 1)); // printando a fase
+
 			while (running && phaseRunning) { // quando passar do segundo boss, o jogo termina
 
 				// public static long currentTime = System.currentTimeMillis();
@@ -265,8 +267,11 @@ public class Main {
 					}
 				}
 
-				if (GameLib.iskeyPressed(GameLib.KEY_ESCAPE))
+				if (GameLib.iskeyPressed(GameLib.KEY_ESCAPE)){
 					running = false;
+					escapedManually = true;
+				}
+					
 
 				/* Verificando se coordenadas do player ainda estão dentro */
 				/* da tela de jogo após processar entrada do usuário. */
@@ -322,8 +327,15 @@ public class Main {
 
 		}
 
-		if (player1.isGameOver()) {
+		if(escapedManually){
+			System.out.println("LEFT THE GAME");
+			busyWait(System.currentTimeMillis() + 3);
+		}
+		else if (player1.isGameOver()) {
 			System.out.println("GAME OVER");
+			busyWait(System.currentTimeMillis() + 3);
+		} else {
+			System.out.println("YOU WON");
 			busyWait(System.currentTimeMillis() + 3);
 		}
 

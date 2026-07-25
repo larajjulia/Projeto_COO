@@ -10,7 +10,7 @@ public class Player extends Game_Explodable {
     protected double life;
     protected double maxLife;
 
-    private int lives = 3;
+    private int lives = 2;
     private boolean gameOver = false;
     
     public Player(int Life){

@@ -144,6 +144,8 @@ public class Main {
 		/*                                                                                               */
 		/*************************************************************************************************/
 		while (running && phaseIndex < readFirstFile.getPhasesNumber()) {
+			System.out.println("START GAME");
+			
 			String phaseFile = readFirstFile.Phases().get(phaseIndex);
 			Phase_Config phase = Read_Config_Phase.Phase_Reader(phaseFile);
 
@@ -155,6 +157,7 @@ public class Main {
 			boolean phaseRunning = true;
 			long phaseStart = System.currentTimeMillis();
 
+			System.out.println("PHASE " + (phaseIndex + 1));
 			while (running && phaseRunning) { // quando passar do segundo boss, o jogo termina
 
 				// public static long currentTime = System.currentTimeMillis();

@@ -6,13 +6,13 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-    class Configuration{
+class Configuration{
 
-        private String object;
-        private int type, time;
-        private double positionX, positionY;
+    private String object;
+    private int type, time;
+    private double positionX, positionY;
     
-        public Configuration(String object, int type, int time, double positionX, double positionY){
+    public Configuration(String object, int type, int time, double positionX, double positionY){
 
         this.object = object;
         this.type = type;
@@ -20,15 +20,31 @@ import java.util.List;
         this.positionX = positionX;
         this.positionY = positionY;
 
-       }
-
-       public String getObject(){ return object; };
-       public int Type(){ return type; }
-       public int Time(){ return time; }
-       public double positionX(){ return positionX; }
-       public double positionY() { return positionY; }
-
     }
+
+    public String getObject(){ return object; };
+    public int Type(){ return type; }
+    public int Time(){ return time; }
+    public double positionX(){ return positionX; }
+    public double positionY() { return positionY; }
+
+}
+
+class Phase_Config {
+    private List<Enemy_Config> enemies = new ArrayList<>();
+    private List<PowerUp_Config> powerups = new ArrayList<>();
+    private Boss_Config boss;
+
+    public Phase_Config (List<Enemy_Config> enemies, List<PowerUp_Config> powerups, Boss_Config boss){
+        this.enemies = enemies;
+        this.powerups = powerups;
+        this.boss = boss;
+    }
+
+    public List<Enemy_Config> getEnemy_Configs(){return enemies;}
+    public List<PowerUp_Config> getPowerUp_Configs(){return powerups;}
+    public Boss_Config getBoss_Configs(){return boss;}
+}
 
 class Enemy_Config extends Configuration{
 
@@ -62,8 +78,6 @@ class PowerUp_Config extends Configuration{
 }
 
 class Boss_Config extends Configuration{
-
-
      public Boss_Config(String boss, int type, int time, double positionX, double positionY){ 
 
         super(boss, type, time, positionX, positionY);
@@ -80,54 +94,62 @@ class Boss_Config extends Configuration{
 
 
 public class Read_Config_Phase{
-    
-    public void Phase_Reader(String File_Name){
+    public static Phase_Config Phase_Reader(String File_Name){
 
-        List<Enemy_Config> enemiesList = new ArrayList<>();
-        List<PowerUp_Config> powerupsList = new ArrayList<>();
-        Boss_Config boss;
+            List<Enemy_Config> enemiesList = new ArrayList<>();
+            List<PowerUp_Config> powerupsList = new ArrayList<>();
+            Boss_Config boss = null;
 
-        Path inputPath = Path.of("Projeto_COO", "Arquivos_Do_Jogo", File_Name);
-        Path fullPath = inputPath.toAbsolutePath();
+            Path inputPath = Path.of("Arquivos_Do_Jogo", File_Name);
+            Path fullPath = inputPath.toAbsolutePath();
 
-        Charset charset = Charset.forName("US-ASCII");
-        try (BufferedReader reader = Files.newBufferedReader(fullPath, charset)) {
-            String line = reader.readLine();
+            Charset charset = Charset.forName("US-ASCII");
+
+            try (BufferedReader reader = Files.newBufferedReader(fullPath, charset)) {
+                String line;
 
 
-            while (((line = reader.readLine()) != null)) {
+                while (((line = reader.readLine()) != null)) {
 
-                String[] words = line.split("\\s+");
+                    String[] words = line.split("\\s+");
 
-                String object = words[0];
-                int type = Integer.parseInt(words[1]);
-                int time = Integer.parseInt(words[2]);
-                Double positionX = Double.parseDouble(words[3]);
-                Double positionY = Double.parseDouble(words[4]);
+                    String object = words[0];
+                    int type = Integer.parseInt(words[1]);
+                    int time = Integer.parseInt(words[2]);
+                    Double positionX = Double.parseDouble(words[3]);
+                    Double positionY = Double.parseDouble(words[4]);
 
-                switch(object){
+                    switch(object){
 
-                    case "ENEMY": 
+                        case "ENEMY": 
                             Enemy_Config enemy = new Enemy_Config(object, type, time, positionX, positionY); 
                             enemiesList.add(enemy);
                             break;
 
-                            case "POWERUP": 
+                        case "POWERUP": 
                             PowerUp_Config powerup = new PowerUp_Config(object, type, time, positionX, positionY); 
                             powerupsList.add(powerup);
-
                             break;
-                            case "BOSS": 
-                             boss = new Boss_Config(object, type, time, positionX, positionY); 
+
+                        case "BOSS": 
+                            boss = new Boss_Config(object, type, time, positionX, positionY); 
     
+                    }
                 }
-            }
-        } catch (IOException x) {
-            System.err.format("IOException: %s%n", x);
+            } catch (IOException x) {
+                System.err.format("IOException: %s%n", x);
             }
 
-       return new Initial_Data(PlayerLife, PhasesNumber, Phases);  
-    }
+            for (Enemy_Config item : enemiesList)
+                System.out.println(item);
+        
+            // for (PowerUp_Config element : powerupsList);
+            //     System.out.println(element);
+
+            System.out.println(boss);
+
+            return new Phase_Config(enemiesList, powerupsList, boss);  
+        }
 }
 
       

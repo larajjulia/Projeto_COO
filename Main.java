@@ -38,8 +38,10 @@ public class Main {
 		boolean running = true;
 
 		/* variáveis do player */
+
+		Initial_Data readFirstFile = ReadFiles.Read_Initial_File();
 		
-		Player player1 = new Player();						// estado
+		Player player1 = new Player(readFirstFile.getPlayer_Life());						// estado
 
 		/* variáveis dos projéteis disparados pelo player */
 		

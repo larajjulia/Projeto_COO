@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.nio.file.*;
 
 
 class Initial_Data{
@@ -27,11 +28,10 @@ class Initial_Data{
 
 public class ReadFiles {
 
-public static Path inputPath = Path.of("Projeto_COO", "Arquivos_Do_Jogo","ArquivoInicial.txt");
-public static Path fullPath = inputPath.toAbsolutePath();
+    public static Path inputPath = Path.of("Arquivos_Do_Jogo","ArquivoInicial.txt");
+    public static Path fullPath = inputPath.toAbsolutePath();
    
     public static Initial_Data Read_Initial_File(){
-
         int PlayerLife = 0;
         int PhasesNumber = 0;
         List <String> Phases = new ArrayList<>();
@@ -58,6 +58,7 @@ public static Path fullPath = inputPath.toAbsolutePath();
             System.err.format("IOException: %s%n", x);
         }
 
-           return new Initial_Data(PlayerLife, PhasesNumber, Phases);
+
+        return new Initial_Data(PlayerLife, PhasesNumber, Phases);
     }
 }

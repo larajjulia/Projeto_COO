@@ -6,9 +6,13 @@ public class Player extends Game_Explodable {
     private long nextShot = currentTime; // próximo momento em que o jogador pode disparar
     private final double radius = 12.0; // raio(tamanho) do jogador
     public boolean invincible = false; // variavel de controle do powerup 2
+    protected boolean alive = false;
+    protected double life;
     
-    public Player(){
+    public Player(int Life){
         super(GameLib.WIDTH / 2, GameLib.HEIGHT * 0.90);
+        alive = true;
+        this.life = Life;
     }
 
     public double getState(){return state;}
@@ -21,7 +25,24 @@ public class Player extends Game_Explodable {
         velocityX = X;
         velocityY = Y;
     }
-    
+
+    protected void visualPlayerLife(){ // faz a barra de vida
+        GameLib.setColor(Color.BLACK);
+        GameLib.drawLine(GameLib.WIDTH / 2 - 50.0, 60.0, GameLib.WIDTH/2 + 50.0, 60.0);
+        GameLib.setColor(Color.RED);
+        GameLib.drawLine(GameLib.WIDTH / 2 - life / 2, 60.0, GameLib.WIDTH / 2 + life / 2, 60.0);
+    }
+
+    @Override
+    public void explode(long time){
+        if(life != 0){
+            life--;
+        }
+        else{
+            super.explode(time);
+            alive = false;
+        }
+    }
 
     public void updateX(){ // conserta a coordenada X se o jogador estiver fora da cena do jogo (após input)
         if(X < 0.0) X = 0.0;

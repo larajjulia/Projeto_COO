@@ -38,8 +38,6 @@ public class GameLib {
 	public static final int KEY_CONTROL = 4;
 	public static final int KEY_ESCAPE = 5;
 
-	private static Font gameFont = new Font("Arial", Font.BOLD, 36);
-
 	private static MyFrame frame = null;
 	private static Graphics g = null;
 	private static MyKeyAdapter keyboard = null;

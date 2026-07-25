@@ -3,8 +3,8 @@ import java.awt.Color;
 public class Boss_2 extends Boss{
     protected long nextShot = currentTime;
 
-    public Boss_2(double X, double Y, double velocity, double angle, double velocityRotation){
-        super(X, Y, velocity, angle, velocityRotation);
+    public Boss_2(double X, double Y, double velocity, double angle, double velocityRotation, double life){
+        super(X, Y, velocity, angle, velocityRotation, life);
         this.radius = 12;
     }
 

@@ -20,7 +20,7 @@ public class Main {
 	public static long initialTime; //variavel de controle de tempo
 	public static Boss bossAtivo = null; // indica a presença ou não de boss
 	public static int typeBoss = 1; // determina o tipo do boss a ser instanciado
-	public static long enemyDelay; // delay entre fases do jogo
+	public static long phaseDelay; // delay entre fases do jogo
 	/* Espera, sem fazer nada, até que o instante de tempo atual seja */
 	/* maior ou igual ao instante especificado no parâmetro "time.    */
 	
@@ -40,21 +40,12 @@ public class Main {
 		/* variáveis do player */
 
 		Initial_Data readFirstFile = ReadFiles.Read_Initial_File();
-		
-		Player player1 = new Player(readFirstFile.getPlayer_Life());						
+		Player player1 = new Player(readFirstFile.getPlayer_Life());
+		int phaseNow = 0;
+		Phase_Info phaseInfo = Phase_Info.Read_Enemy_Info(readFirstFile.Phases().get(phaseNow));						
 
 		/* variáveis dos projéteis disparados pelo player */
-		
 		Projectile.projectilePlayer(GameLib.WIDTH / 2, GameLib.HEIGHT * 0.90 - player1.getRadius(), 1.25, 1.25); 	
-
-		/* variáveis dos inimigos/powerup tipo 1 */
-		new Enemy_Type1(GameLib.WIDTH / 8, -10.0, 0.0, 0.0, 0.5);
-		new Powerup_1(GameLib.WIDTH / 3, -9.0, 0.0, 0.0, 0.5);
-
-		/* variáveis dos inimigos/powerup tipo 2 */
-		new Enemy_Type2(GameLib.WIDTH / 2, -10.0, 0.0, 0.0, 0.5);
-		new Powerup_2(GameLib.WIDTH / 4, -9.0, 0.0, 0.0, 0.5);
-		
 		/* variáveis dos projéteis lançados pelos inimigos (tanto tipo 1, quanto tipo 2) */
 		Projectile.projectileEnemy(0.0, 0.0, 0.0, 0.0); 
 		
@@ -88,7 +79,7 @@ public class Main {
 		/*                                                                                               */
 		/*************************************************************************************************/
 		
-		while(running && typeBoss <= 2){ // quando passar do segundo boss, o jogo termina
+		while(running){
 
 			// public static long currentTime = System.currentTimeMillis();
     		// public static long delta = System.currentTimeMillis() - currentTime;
@@ -142,11 +133,7 @@ public class Main {
 			for (Enemy_Shooter item : new ArrayList<>(Enemy_Shooter.listEnemyShooters))
 				item.readyToShoot(player1);
 
-			/* verificando se novos inimigos devem ser "lançados" */
 			
-			for (Enemy element : new ArrayList<>(Enemy.listEnemies)){
-				element.addEnemy();
-			}
 			
 			/* Verificando se a explosão do player já acabou.         */
 			/* Ao final da explosão, o player volta a ser controlável */
@@ -206,29 +193,70 @@ public class Main {
 				item.visualEnemies();
 			
 			
-			//começo do setup dos bosses
+			//começo do setup dos inimigos
+
+			for(Enemy_Info info : phaseInfo.enemies){
+                if(!info.spawned && Game_Object.currentTime - initialTime >= info.when){
+					if(info.powerup == false){
+						if(info.type == 1) new Enemy_Type1(info.X, info.Y, 0.0, 0.0, 0.5);
+						else new Enemy_Type2(info.X, info.Y, 0.0, 0.0, 0.5);
+	
+					}
+					else{
+						if(info.type == 1) new Powerup_1(info.X, info.Y, 0.3, 0.0, 0.5);
+						else new Powerup_2(info.X, info.Y, 0.15, 0.0, 0.5);
+					}
+					info.spawned = true;
+				}
+            }
+
+			//spawn dos bosses
+			if(phaseInfo.boss != null && phaseInfo.boss.spawned == false && bossAtivo == null && Game_Object.currentTime - initialTime >= phaseInfo.boss.when){
+				bossAtivo = Boss.bossApplication(phaseInfo.boss);
+				phaseInfo.boss.spawned = true;
+			}
 
 			//verificação de atualização de estados
 			if(bossAtivo != null){
 				if(bossAtivo.getState() == INACTIVE){
 					bossAtivo = null;
-					initialTime = System.currentTimeMillis();
-					typeBoss++;
-					enemyDelay = Game_Object.currentTime + 3000;
 				}
 				else bossAtivo.adjustMovement();
 			}
 
-			//spawn dos bosses
-			if(Game_Object.currentTime - initialTime >= 15000 && bossAtivo == null){ // se tiverem passado 15 segundos de inimigos regulares
-				bossAtivo = Boss.bossApplication(typeBoss);
+			//checagem se acabou o spawn de inimigos
+			boolean endEnemies = true;
+			for(Enemy_Info enemy : phaseInfo.enemies){
+				if(enemy.spawned == false){
+					endEnemies = false;
+					break;
+				}
+			}
+
+			//checagem se acabou o boss e deve acabar a fase
+			boolean endBoss = false;
+			if(phaseInfo.boss == null || phaseInfo.boss.spawned == true && bossAtivo == null){
+				endBoss = true;
+			}
+
+			//define que a fase acabou, seta um delay entre as fases
+			if(endBoss && endEnemies && Enemy.listEnemies.isEmpty()){
+				phaseDelay = Game_Object.currentTime + 3000;
+			}
+
+			//comportamento após a fase terminar de fato
+			if(phaseDelay != 0 && Game_Object.currentTime >= phaseDelay){
+				phaseNow++;
+				if(phaseNow > readFirstFile.getPhasesNumber()){
+					//aqui printa a mensagem de vitória
+					running = false;
+				}
+				else{
+					phaseInfo = Phase_Info.Read_Enemy_Info(readFirstFile.Phases().get(phaseNow));
+					initialTime = Game_Object.currentTime;
+				}
 			}
 			
-			//setup após fases
-			if(enemyDelay != 0 && Game_Object.currentTime >= enemyDelay){
-    			Boss.setupEnemies();
-    			enemyDelay = 0; 
-			}
 	
 			/* chamada a display() da classe GameLib atualiza o desenho exibido pela interface do jogo. */
 			

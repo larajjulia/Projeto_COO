@@ -3,5 +3,6 @@ public class Enemy_Info {
     public long when; // quando será lançado
     public double X;
     public double Y;
-    boolean alive = false;
+    public boolean spawned = false;
+    public boolean powerup; // define se é um powerup
 }

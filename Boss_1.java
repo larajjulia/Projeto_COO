@@ -4,8 +4,8 @@ public class Boss_1 extends Boss{
     protected long nextShot = currentTime;
     
     
-    public Boss_1(double X, double Y, double velocity, double angle, double velocityRotation){
-        super(X, Y, velocity, angle, velocityRotation);
+    public Boss_1(double X, double Y, double velocity, double angle, double velocityRotation, double life){
+        super(X, Y, velocity, angle, velocityRotation, life);
         this.radius = 15;
     }
 

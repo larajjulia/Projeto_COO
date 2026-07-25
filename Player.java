@@ -29,7 +29,7 @@ public class Player extends Game_Explodable {
     protected void visualPlayerLife(){ // faz a barra de vida
         GameLib.setColor(Color.BLACK);
         GameLib.drawLine(GameLib.WIDTH / 2 - 50.0, 630.0, GameLib.WIDTH/2 + 60.0, 630.0);
-        GameLib.setColor(Color.RED);
+        GameLib.setColor(Color.GREEN);
         GameLib.drawLine(GameLib.WIDTH / 2 - life / 2, 630.0, GameLib.WIDTH / 2 + life / 2, 630.0);
     }
 

@@ -63,7 +63,7 @@ public class Main {
     	bossInfo.X = config.positionX();
     	bossInfo.Y = config.positionY();
     	bossInfo.when = config.Time();
-    	bossInfo.life = 120.0; // Boss.java ainda ignora o parâmetro "life" do construtor e fixa 120.0 internamente, veja observação abaixo
+    	bossInfo.life = config.Life(); // Boss.java ainda ignora o parâmetro "life" do construtor e fixa 120.0 internamente, veja observação abaixo
 
     	return Boss.bossApplication(bossInfo);
 	}

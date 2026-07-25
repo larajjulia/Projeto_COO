@@ -41,7 +41,7 @@ public class Main {
 
 		Initial_Data readFirstFile = ReadFiles.Read_Initial_File();
 		
-		Player player1 = new Player(readFirstFile.getPlayer_Life());						// estado
+		Player player1 = new Player(readFirstFile.getPlayer_Life());						
 
 		/* variáveis dos projéteis disparados pelo player */
 		
@@ -230,8 +230,6 @@ public class Main {
     			enemyDelay = 0; 
 			}
 	
-
-			
 			/* chamada a display() da classe GameLib atualiza o desenho exibido pela interface do jogo. */
 			
 			GameLib.display();
